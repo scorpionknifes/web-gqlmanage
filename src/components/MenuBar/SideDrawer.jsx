@@ -5,9 +5,11 @@ import { List, ListItem, ListItemIcon, ListItemText, Divider } from '@material-u
 
 export default () => {
 
-    const top = {
-        
-    }
+    const top = [
+        {
+            name: "Rooms"
+        },
+    ]
 
     return (
         <div style={{ width: 240 }}>

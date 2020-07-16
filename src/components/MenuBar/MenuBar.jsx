@@ -5,7 +5,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles'
 
 import MenuIcon from '@material-ui/icons/Menu'
 import { AppBar, Typography, Toolbar, IconButton, Hidden, Drawer} from '@material-ui/core'
-import { List, ListItem, ListItemIcon, ListItemText, Divider } from '@material-ui/core'
+
 import AccountButton from './AccountButton';
 import SideDrawer from './SideDrawer';
 
