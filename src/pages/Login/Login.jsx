@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { TextField, Button, Grid, Typography } from '@material-ui/core'
 
-export default () => {
+const Login = () => {
     const handleLogin= () => {
 
     }
-
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
@@ -38,3 +37,5 @@ export default () => {
         </Grid>
     )
 }
+
+export default Login

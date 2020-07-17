@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import {SimpleDateField, SimpleSelectionField, SimpleTextField} from '../Form/SimpleFields'
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexWrap: 'wrap',
+        maxWidth: '700px',
     },
     textField: {
         marginLeft: theme.spacing(1),
@@ -14,18 +15,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function LayoutTextFields() {
-    /*
-    id: ID!
-    room: String!
-    name: String!
-    macAddress: String!
-    memo:         String!
-    serialNumber: String!
-    createdDate:  Time!
-    lastModified: Time!
-    */
-
+const Change = () => {
     const classes = useStyles()
 
     const [id, setID] = useState("")
@@ -48,6 +38,7 @@ export default function LayoutTextFields() {
 
                 <SimpleDateField name="Created Date" helper="" disabled value={createdDate}/>
                 <SimpleDateField name="Last Modified" helper="" disabled value={lastModified}/>
+                <SimpleSelectionField/>
             </div>
         </div>
     );
@@ -64,39 +55,4 @@ function formatMAC(e) {
     e.target.value = str.slice(0, 17);
 };
 
-const SimpleTextField = (props) => {
-    return (
-        <TextField
-            label={props.name}
-            style={{ margin: 8 }}
-            placeholder={props.name}
-            required={props.required}
-            value={props.value}
-            onChange={props.onChange}
-            helperText={props.helper}
-            disabled={props.disabled}
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-                shrink: true,
-            }}
-            multiline
-        />
-    )
-}
-
-const SimpleDateField = (props) => {
-    return (
-        <TextField
-            label={props.name}
-            type="datetime-local"
-            value={props.value}
-            style={{ margin: 8 }}
-            fullWidth
-            InputLabelProps={{
-                shrink: true,
-            }}
-            disabled={props.disabled}
-        />
-    )
-}
+export default Change

@@ -1,8 +1,7 @@
 import React from 'react'
-import MailIcon from '@material-ui/icons/Mail'
-import InboxIcon from '@material-ui/icons/MoveToInbox'
-import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
-import RouterIcon from '@material-ui/icons/Router';
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
+import RouterIcon from '@material-ui/icons/Router'
+import {Link} from 'react-router-dom'
 import { List, ListItem, ListItemIcon, ListItemText, Divider } from '@material-ui/core'
 
 export default () => {
@@ -10,11 +9,13 @@ export default () => {
     const top = [
         {
             name: "Rooms",
-            icon: <MeetingRoomIcon/>
+            icon: <MeetingRoomIcon/>,
+            location:"/rooms"
         },
         {
             name: "Devices",
-            icon: <RouterIcon/>
+            icon: <RouterIcon/>,
+            location:"/devices"
 
         }
     ]
@@ -22,11 +23,13 @@ export default () => {
     const bot = [
         {
             name: "Add Room",
-            icon: <MeetingRoomIcon/>
+            icon: <MeetingRoomIcon/>,
+            location:"/add/room"
         },
         {
             name: "Add Device",
-            icon: <RouterIcon/>
+            icon: <RouterIcon/>,
+            location:"/add/device"
 
         }
     ]
@@ -36,7 +39,7 @@ export default () => {
             <Divider />
             <List>
                 {top.map((item, i) => (
-                    <ListItem button key={i}>
+                    <ListItem component={Link} to={item.location} button key={i}>
                         <ListItemIcon>{item.icon}</ListItemIcon>
                         <ListItemText primary={item.name} />
                     </ListItem>
@@ -45,7 +48,7 @@ export default () => {
             <Divider />
             <List>
                 {bot.map((item, i) => (
-                    <ListItem button key={i}>
+                    <ListItem component={Link} to={item.location} button key={i}>
                         <ListItemIcon>{item.icon}</ListItemIcon>
                         <ListItemText primary={item.name} />
                     </ListItem>

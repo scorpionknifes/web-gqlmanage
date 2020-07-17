@@ -1,21 +1,49 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { Grid } from '@material-ui/core'
+import Card from '../../components/Room/Card'
+//import { useQuery } from '@apollo/client'
+//import RoomsQuery from '../../graphql/RoomsQuery'
 
-const roomsQuery = useQuery(LocationQuery, {
-    variables: { input: searchQuery }
-})
+/*
+const roomsQuery = useQuery(RoomsQuery, {
+    variables: { input: "" }
+})*/
 
 
+/*
 useEffect(() => {
-    const { loading, error, data } = locationQuery
+    const { loading, error, data } = roomsQuery
     if (!error && !loading && data) {
         const { locations } = data
         console.log(locations)
         if (locations.length === 0) {
             console.log("no results")
-            setJobs(null)
             return
         }
-        setSlug(locations[0].slug)
-        setType(locations[0].type)
     }
-}, [locationQuery])
+}, [])*/
+
+const Rooms = () => {
+    return (
+        <div>
+            <Grid container spacing={4}>
+                <Grid item sm={6} md={4} lg={3} container>
+                    <Card />
+                </Grid>
+                <Grid item sm={6} md={4} lg={3} container>
+                    <Card />
+                </Grid>
+
+                <Grid item sm={6} md={4} lg={3} container>
+                    <Card />
+                </Grid>
+
+                <Grid item sm={6} md={4} lg={3} container>
+                    <Card />
+                </Grid>
+            </Grid>
+        </div>
+    )
+}
+
+export default Rooms
