@@ -76,9 +76,7 @@ export default function MenuAppBar(props) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" className={classes.title}>
-                        Photos
-          </Typography>
+                    <Typography variant="h6" className={classes.title}>{process.env.REACT_APP_HOTEL}</Typography>
                     {auth && (
                         <AccountButton/>
                     )}
