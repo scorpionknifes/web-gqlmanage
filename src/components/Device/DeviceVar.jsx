@@ -1,7 +1,6 @@
 import React from 'react'
 import {Chip} from '@material-ui/core'
 
-import undefined from '../../images/undefined.jpg'
 import alexa from '../../images/alexa.png'
 import clipsal from '../../images/clipsal.png'
 import controller from '../../images/controller.png'
@@ -14,7 +13,7 @@ const status = [
 ]
 
 const type = [
-    undefined,
+    "",
     controller,
     alexa,
     zwave,

@@ -21,7 +21,7 @@ const RoomCard = (props) => {
 
     return (
         <Card className={classes.card}>
-            <CardActionArea className={classes.body}>
+            <CardActionArea component={Link} to={`/room/${props.id}`} className={classes.body}>
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                         Room {props.roomNumber}

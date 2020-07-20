@@ -17,6 +17,9 @@ const useStyles = makeStyles({
     cardbody: {
         height: "calc( 100% - 46px )"
     },
+    cardcontent: {
+        height: "calc( 100% - 50px )"
+    }
 });
 
 const DeviceCard = (props) => {
@@ -24,8 +27,8 @@ const DeviceCard = (props) => {
 
     return (
         <Card className={classes.card}>
-            <CardActionArea className={classes.cardbody}>
-                <div style={{ height: "50px" }}>
+            <CardActionArea component={Link} to={`/device/${props.id}`} className={classes.cardbody}>
+                <div style={{ height: "50px", margin: "10px" }}>
                     <CardMedia
                         className={classes.media}
                         image={type[props.type]}
@@ -33,7 +36,7 @@ const DeviceCard = (props) => {
                     />
                 </div>
 
-                <CardContent>
+                <CardContent className={classes.cardcontent}>
                     <Typography gutterBottom variant="h5" component="h2">
                         {props.name}
                     </Typography>
@@ -44,6 +47,7 @@ const DeviceCard = (props) => {
                     <Typography variant="body2" color="textSecondary" component="p">
                         {props.memo}
                     </Typography>
+                    <br/>
                     {status[props.status]}
                 </CardContent>
             </CardActionArea>

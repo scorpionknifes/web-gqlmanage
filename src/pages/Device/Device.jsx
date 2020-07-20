@@ -1,7 +1,8 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
 
-export default () => {
-    let { id } = useParams();
-    return 
+const Device = () => {
+    let { id } = useParams()
+    return <></>
 }
+export default Device
