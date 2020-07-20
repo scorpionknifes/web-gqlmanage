@@ -1,17 +1,17 @@
 import React from 'react';
 import './App.css';
-import AddRoom from './pages/AddRoom/AddRoom'
+
 import MenuAppBar from './components/MenuBar/MenuBar';
 import AuthProvider from './contexts/AuthContext';
-import DeviceChange from './components/Device/DeviceChange';
+import DeviceChange from './components/Device/DeviceEdit';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
 //Pages
 import Login from './pages/Login/Login';
-import Rooms from './pages/Rooms/Rooms';
-import Devices from './pages/Devices/Devices'
+import {AddRoom, EditRoom, Rooms, Room} from './pages/Room'
+import {AddDevice, EditDevice, Devices, Device} from './pages/Device'
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL_URL,
@@ -42,10 +42,16 @@ function App() {
           <MenuAppBar>
             <Switch>
               <Route exact path="/login" component={Login} />
+
               <Route exact path="/rooms" component={Rooms} />
+              <Route exact path="/room/add" component={AddRoom}/>
+              <Route exact path="/room/:id" component={Room}/>
+              <Route exact path="/room/edit/:id" component={EditRoom}/>
+    
               <Route exact path="/devices" component={Devices} />
-              <Route exact path="/add/room" component={AddRoom}/>
-              <Route exact path="/add/device" component={DeviceChange} />
+              <Route exact path="/device/add" component={DeviceChange} />
+              <Route exact path="/device/:id" component={Device}/>
+              <Route exact path="/device/edit/:id" component={EditDevice}/>
             </Switch>
           </MenuAppBar>
         </AuthProvider>

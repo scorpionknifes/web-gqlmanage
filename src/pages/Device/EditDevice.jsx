@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom';
 
-const Room = () => {
+const EditDevice = () => {
     let { id } = useParams();
     return <></>
 }
 
-export default Room
+export default EditDevice

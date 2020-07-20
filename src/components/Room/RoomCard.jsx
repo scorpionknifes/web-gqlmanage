@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import { Card,  CardContent, CardActionArea, Typography, CardActions, Button } from "@material-ui/core";
+import { Card,  CardContent, Box, CardActionArea, Typography, CardActions, Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
     card: {
@@ -20,16 +21,18 @@ const RoomCard = (props) => {
             <CardActionArea>
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                        Room 1020
+                        Room {props.roomNumber}
                     </Typography>
+                    <Box component="div" height="150px" visibility="auto">
                     <Typography variant="body2" color="textSecondary" component="p">
-                        Memo
+                        {props.memo ? props.memo:"Empty"}
                     </Typography>
+                    </Box>
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button size="small" color="primary">View</Button>
-                <Button size="small" color="primary">Edit</Button>
+                <Button component={Link} to={`/room/${props.id}`} size="small" color="primary">View</Button>
+                <Button component={Link} to={`/room/edit/${props.id}`} size="small" color="primary">Edit</Button>
             </CardActions>
         </Card>
     );
