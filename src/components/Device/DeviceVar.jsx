@@ -1,10 +1,24 @@
+import React from 'react'
+import {Chip} from '@material-ui/core'
+
+import undefined from '../../images/undefined.jpg'
+import alexa from '../../images/alexa.png'
+import clipsal from '../../images/clipsal.png'
+import controller from '../../images/controller.png'
+import zwave from '../../images/zwave.png'
 
 const status = [
-    <Chip variant="outlined" color="primary">Enabled</Chip>, // 0
-    <Chip variant="outlined" color="secondary">Removed</Chip>, // 1
-    <Chip variant="outlined" color="secondary">Replaced</Chip> // 2
+    <Chip variant="outlined" color="primary" label="Enabled"/>, // 0
+    <Chip variant="outlined" color="secondary" label="Removed"/>, // 1
+    <Chip variant="outlined" color="secondary" label="Replaced"/> // 2
 ]
 
 const type = [
-    
+    undefined,
+    controller,
+    alexa,
+    zwave,
+    clipsal
 ]  
+
+export {status,type}

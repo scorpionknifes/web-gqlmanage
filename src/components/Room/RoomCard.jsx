@@ -11,6 +11,9 @@ const useStyles = makeStyles({
     media: {
         height: 140,
     },
+    cardbody: {
+        height: "calc( 100% - 46px )"
+    },
 });
 
 const RoomCard = (props) => {
@@ -18,7 +21,7 @@ const RoomCard = (props) => {
 
     return (
         <Card className={classes.card}>
-            <CardActionArea>
+            <CardActionArea className={classes.body}>
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                         Room {props.roomNumber}
