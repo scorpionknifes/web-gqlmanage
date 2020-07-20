@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {SimpleDateField, SimpleSelectionField, SimpleTextField} from '../Form/SimpleFields'
+import { SaveButton } from '../Form/SimpleButtons';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,7 +34,7 @@ const Add = () => {
     return (
         <div className={classes.root}>
             <>
-        
+                <SaveButton/>
             </>
             <div>
                 <SimpleTextField name="Name" helper="name description (optional)" value={name}/>
