@@ -5,20 +5,20 @@ import { Link } from "react-router-dom";
 import { type, status } from './DeviceVar'
 
 const useStyles = makeStyles({
-    card: {
+    devicecard: {
         width: "100%",
         height: "100%",
         margin: "auto",
     },
-    media: {
+    devicemedia: {
         height: "50px",
         backgroundSize: "contain"
     },
-    cardbody: {
+    devicecardbody: {
         height: "calc( 100% - 46px )"
     },
-    cardcontent: {
-        height: "calc( 100% - 50px )"
+    devicecardcontent: {
+        
     }
 });
 
@@ -26,17 +26,14 @@ const DeviceCard = (props) => {
     const classes = useStyles();
 
     return (
-        <Card className={classes.card}>
-            <CardActionArea component={Link} to={`/device/${props.id}`} className={classes.cardbody}>
-                <div style={{ height: "50px", margin: "10px" }}>
-                    <CardMedia
-                        className={classes.media}
-                        image={type[props.type]}
-                        title="Contemplative Reptile"
-                    />
-                </div>
-
-                <CardContent className={classes.cardcontent}>
+        <Card className={classes.devicecard}>
+            <CardActionArea component={Link} to={`/device/${props.id}`} className={classes.devicecardbody}>
+                <CardMedia
+                    className={classes.devicemedia}
+                    image={type[props.type]}
+                    title="Contemplative Reptile"
+                />
+                <CardContent className={classes.devicecardcontent}>
                     <Typography gutterBottom variant="h5" component="h2">
                         {props.name}
                     </Typography>
