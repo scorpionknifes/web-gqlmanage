@@ -39,6 +39,7 @@ const RoomEdit = () => {
                 <SimpleDateField name="Created Date" helper="" disabled value={createdDate}/>
                 <SimpleDateField name="Last Modified" helper="" disabled value={lastModified}/>
                 <SimpleSelectionField/>
+                <SimpleSelectionField/>
             </div>
         </div>
     );

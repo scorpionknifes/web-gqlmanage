@@ -28,7 +28,9 @@ const Add = () => {
         createdDate:  Time!
     */
 
-    const [roomNumber, setRoomNumber] = useState("")
+    const [name, setName] = useState("")
+    const [macAddress, setMacAddress] = useState("")
+    const [sn, setSN] = useState("")
     const [memo, setMemo] = useState("")
 
     return (
