@@ -24,9 +24,10 @@ const device = {
     macAddress: "00:00:00:00:00",
     memo: "My Custom Memo",
     serialNumber: "ABCDEFG",
-    status: "status",
-    createdDate: "",
-    lastModifed: ""
+    status: 1,
+    type: 1,
+    createdDate: "2020-07-22T07:36:06Z",
+    lastModifed: "2020-07-22T07:36:06Z"
 }
 
 const DeviceView = () => {

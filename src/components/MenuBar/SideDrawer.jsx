@@ -1,6 +1,8 @@
 import React from 'react'
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
 import RouterIcon from '@material-ui/icons/Router'
+import PeopleIcon from '@material-ui/icons/People'
+import PersonAddIcon from '@material-ui/icons/PersonAdd'
 import {Link} from 'react-router-dom'
 import { List, ListItem, ListItemIcon, ListItemText, Divider } from '@material-ui/core'
 
@@ -17,6 +19,12 @@ export default () => {
             icon: <RouterIcon/>,
             location:"/devices"
 
+        },
+        {
+            name: "User",
+            icon: <PeopleIcon/>,
+            location:"/users"
+
         }
     ]
 
@@ -24,12 +32,12 @@ export default () => {
         {
             name: "Add Room",
             icon: <MeetingRoomIcon/>,
-            location:"/add/room"
+            location:"/room/add"
         },
         {
-            name: "Add Device",
-            icon: <RouterIcon/>,
-            location:"/add/device"
+            name: "Add User",
+            icon: <PersonAddIcon/>,
+            location:"/user/add"
 
         }
     ]

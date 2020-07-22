@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
-import { Grid } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import RoomCard from '../../components/Room/RoomCard'
+import AddButton from '../../components/Button/AddButton'
 //import { useQuery } from '@apollo/client'
 //import RoomsQuery from '../../graphql/RoomsQuery'
 
@@ -53,15 +54,21 @@ const data = [
 
 const Rooms = () => {
     return (
-        <div>
-            <Grid container spacing={4}>
-                {data?.sort((a, b) =>(a.roomNumber > b.roomNumber) - (a.roomNumber < b.roomNumber)).map(room => {
-                    return <Grid item sm={6} md={4} lg={3} container>
-                        <RoomCard id={room.id} roomNumber={room.roomNumber} memo={room.memo} />
-                    </Grid>
-                })}
-            </Grid>
-        </div>
+        <>
+            <Typography variant="h4">Rooms</Typography>
+            <br />
+            <AddButton />
+            <br />
+            <div>
+                <Grid container spacing={4}>
+                    {data?.sort((a, b) => (a.roomNumber > b.roomNumber) - (a.roomNumber < b.roomNumber)).map(room => {
+                        return <Grid item sm={6} md={4} lg={3} container>
+                            <RoomCard id={room.id} roomNumber={room.roomNumber} memo={room.memo} />
+                        </Grid>
+                    })}
+                </Grid>
+            </div>
+        </>
     )
 }
 

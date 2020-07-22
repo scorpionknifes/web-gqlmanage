@@ -2,6 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom';
 import EditButton from '../../components/Button/EditButton';
 import { DeviceView } from '../../components/Device';
+import { Typography } from '@material-ui/core';
 
 const device = {
     id: "mydeviceid",
@@ -19,9 +20,11 @@ const device = {
 const Device = () => {
     let { id } = useParams()
     return <>
-    <EditButton edit={`/device/edit/${id}`} back={`/room/${device.room}`}/>
-    <br/>
-    <DeviceView/>
+        <Typography variant="h4">Device - {device.name}</Typography>
+        <br />
+        <EditButton edit={`/device/edit/${id}`} back={`/room/${device.room}`} />
+        <br />
+        <DeviceView />
     </>
 }
 export default Device

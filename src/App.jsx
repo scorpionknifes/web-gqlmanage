@@ -50,7 +50,7 @@ function App() {
     
               <Route exact path="/devices" component={Devices} />
               <Route exact path="/devices/:id" component={Devices} />
-              <Route exact path="/device/add" component={AddDevice} />
+              <Route exact path="/device/add/:id" component={AddDevice} />
               <Route exact path="/device/:id" component={Device}/>
               <Route exact path="/device/edit/:id" component={EditDevice}/>
             </Switch>
