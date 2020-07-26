@@ -16,16 +16,8 @@ const useStyles = makeStyles({
     }
 });
 
-const room = {
-    id: "myroomid",
-    roomNumber: "1023",
-    memo: "my room memo",
-    username: "room1023",
-    password: "examplepassword",
-    createdDate: "2020-07-22T07:36:06Z"
-}
 
-const RoomView = () => {
+const RoomView = ({room}) => {
     const classes = useStyles();
     return (
     <TableContainer component={Paper} className={classes.roomviewcontainer}>
@@ -36,26 +28,26 @@ const RoomView = () => {
                         <Typography gutterBottom variant="h6">Room </Typography>
                     </TableCell>
                     <TableCell>
-                        <Typography gutterBottom variant="h6">{room.roomNumber} </Typography>
+                        <Typography gutterBottom variant="h6">{room?.roomNumber} </Typography>
                     </TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
                 <TableRow>
                     <TableCell><b>Memo</b></TableCell>
-                    <TableCell>{room.memo}</TableCell>
+                    <TableCell>{room?.memo}</TableCell>
                 </TableRow>
                 <TableRow>
                     <TableCell><b>Username</b></TableCell>
-                    <TableCell>{room.username}</TableCell>
+                    <TableCell>{room?.username}</TableCell>
                 </TableRow>
                 <TableRow>
                     <TableCell><b>Password</b></TableCell>
-                    <TableCell>{room.password}</TableCell>
+                    <TableCell>{room?.password}</TableCell>
                 </TableRow>
                 <TableRow>
                     <TableCell><b>Created Date</b></TableCell>
-                    <TableCell>{room.createdDate}</TableCell>
+                    <TableCell>{room?.createdDate}</TableCell>
                 </TableRow>
             </TableBody>
         </Table>

@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import { Card,  CardContent, Box, CardActionArea, Typography, CardActions, Button } from "@material-ui/core";
+import { Card, CardContent, Box, CardActionArea, Typography, CardActions, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
@@ -11,6 +11,9 @@ const useStyles = makeStyles({
     roomcardbody: {
         height: "calc( 100% - 46px )"
     },
+    roomcontext:{
+        overflow: "auto"
+    }
 });
 
 const RoomCard = (props) => {
@@ -23,10 +26,10 @@ const RoomCard = (props) => {
                     <Typography gutterBottom variant="h5" component="h2">
                         Room {props.roomNumber}
                     </Typography>
-                    <Box component="div" height="150px" visibility="auto">
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        {props.memo ? props.memo:"Empty"}
-                    </Typography>
+                    <Box className={classes.roomcontext} component="div" height="150px" visibility="auto">
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            {props.memo ? props.memo : "Empty"}
+                        </Typography>
                     </Box>
                 </CardContent>
             </CardActionArea>

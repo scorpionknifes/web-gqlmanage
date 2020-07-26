@@ -12,25 +12,12 @@ const useStyles = makeStyles({
         minWidth: 500,
     },
     devicetablecell: {
+        whiteSpace: 'nowrap',
         width: 100,
     }
 });
 
-const device = {
-    id: "mydeviceid",
-    room: "myroomid",
-    name: "Main Light",
-    model: "PAN04",
-    macAddress: "00:00:00:00:00",
-    memo: "My Custom Memo",
-    serialNumber: "ABCDEFG",
-    status: 1,
-    type: 1,
-    createdDate: "2020-07-22T07:36:06Z",
-    lastModifed: "2020-07-22T07:36:06Z"
-}
-
-const DeviceView = () => {
+const DeviceView = ({device}) => {
     const classes = useStyles();
     return (
     <TableContainer component={Paper} className={classes.deviceviewcontainer}>
@@ -38,7 +25,7 @@ const DeviceView = () => {
             <TableHead>
                 <TableRow>
                     <TableCell className={classes.devicetablecell}>
-                        <Typography gutterBottom variant="h6">{device.name}</Typography>
+                        <Typography gutterBottom variant="h6">{device?.name}</Typography>
                     </TableCell>
                     <TableCell></TableCell>
                 </TableRow>
@@ -46,27 +33,27 @@ const DeviceView = () => {
             <TableBody>
                 <TableRow>
                     <TableCell><b>MAC Address</b></TableCell>
-                    <TableCell>{device.macAddress}</TableCell>
+                    <TableCell>{device?.macAddress}</TableCell>
                 </TableRow>
                 <TableRow>
                     <TableCell><b>Memo</b></TableCell>
-                    <TableCell>{device.memo}</TableCell>
+                    <TableCell>{device?.memo}</TableCell>
                 </TableRow>
                 <TableRow>
                     <TableCell><b>Serial Number</b></TableCell>
-                    <TableCell>{device.serialNumber}</TableCell>
+                    <TableCell>{device?.serialNumber}</TableCell>
                 </TableRow>
                 <TableRow>
                     <TableCell><b>status</b></TableCell>
-                    <TableCell>{device.status}</TableCell>
+                    <TableCell>{device?.status}</TableCell>
                 </TableRow>
                 <TableRow>
                     <TableCell><b>Created Date</b></TableCell>
-                    <TableCell>{device.createdDate}</TableCell>
+                    <TableCell>{device?.createdDate}</TableCell>
                 </TableRow>
                 <TableRow>
-                    <TableCell><b>Last Modifed</b></TableCell>
-                    <TableCell>{device.lastModifed}</TableCell>
+                    <TableCell><b>Last Modified</b></TableCell>
+                    <TableCell>{device?.lastModified}</TableCell>
                 </TableRow>
             </TableBody>
         </Table>

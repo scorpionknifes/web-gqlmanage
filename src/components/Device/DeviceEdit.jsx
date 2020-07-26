@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import {SimpleDateField, SimpleSelectionField, SimpleTextField} from '../Form/SimpleFields'
+import React, { useState, useEffect } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import { useParams } from 'react-router-dom'
+import { SimpleDateField, SimpleTextField } from '../Form/SimpleFields'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -15,31 +16,27 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const RoomEdit = () => {
+const RoomEdit = ({ room }) => {
+    let { id } = useParams()
     const classes = useStyles()
 
-    const [id, setID] = useState("")
-    const [room, setRoom] = useState("")
-    const [name, setName] = useState("")
-    const [macAddress, setMacAddress] = useState("")
-    const [memo, setMemo] = useState("")
-    const [sn, setSN] = useState("")
-    const [createdDate, setCreatedDate] = useState("")
-    const [lastModified, setLastModified] = useState("")
+    const [roomNumber, setRoomNumber] = useState()
+    const [memo, setMemo] = useState()
+
+    useEffect(() => {
+        setMemo(room?.memo)
+        setRoomNumber(room?.roomNumber)
+    }, [room])
 
     return (
         <div className={classes.root}>
             <div>
-                <SimpleTextField name="ID" helper="database ID" disabled value={id}/>
-                <SimpleTextField name="Room ID" helper="database ID" disabled value={room}/>
-                <SimpleTextField name="Name" helper="name description (optional)" value={name}/>
-                <SimpleTextField name="MAC Address" helper="mac address" required value={macAddress}/>
-                <SimpleTextField name="Memo" helper="memo (optional)" value={memo}/>
-                <SimpleTextField name="Serial Number" helper="serial number" value={sn} required />
-                <SimpleDateField name="Created Date" helper="" disabled value={createdDate}/>
-                <SimpleDateField name="Last Modified" helper="" disabled value={lastModified}/>
-                <SimpleSelectionField/>
-                <SimpleSelectionField/>
+                <SimpleTextField name="ID" helper="database ID" disabled value={id} />
+                <SimpleTextField name="Room Number" helper="room number" required value={roomNumber} />
+                <SimpleTextField name="Memo" helper="memo (optional)" value={memo} />
+                <SimpleTextField name="Username" helper="" disabled value={room?.username} />
+                <SimpleTextField name="Password" helper="" disabled value={room?.password} />
+                <SimpleDateField name="Created Date" helper="" disabled value={room?.createdDate} />
             </div>
         </div>
     );
