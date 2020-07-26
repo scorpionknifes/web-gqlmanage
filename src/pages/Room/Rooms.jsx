@@ -1,28 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Grid, Typography } from '@material-ui/core'
 import RoomCard from '../../components/Room/RoomCard'
 import AddButton from '../../components/Button/AddButton'
-//import { useQuery } from '@apollo/client'
-//import RoomsQuery from '../../graphql/RoomsQuery'
-
-/*
-const roomsQuery = useQuery(RoomsQuery, {
-    variables: { input: "" }
-})*/
-
-
-/*
-useEffect(() => {
-    const { loading, error, data } = roomsQuery
-    if (!error && !loading && data) {
-        const { locations } = data
-        console.log(locations)
-        if (locations.length === 0) {
-            console.log("no results")
-            return
-        }
-    }
-}, [])*/
+import { useQuery, gql } from '@apollo/client'
+import RoomFragment from '../../fragments/RoomFragment'
 
 const data = [
     {
@@ -53,6 +34,26 @@ const data = [
 ]
 
 const Rooms = () => {
+
+    const [rooms, setRooms] = useState()
+
+    const roomsQuery = useQuery(gql`
+        query Rooms {
+            rooms {
+                ...RoomFragment
+            }
+        }
+        ${RoomFragment}
+    `)
+
+    useEffect(() => {
+        const { loading, error, data } = roomsQuery
+        if (!error && !loading && data) {
+            setRooms(data)
+        }
+        console.log(error)
+    }, [])
+
     return (
         <>
             <Typography variant="h4">Rooms</Typography>
@@ -61,7 +62,7 @@ const Rooms = () => {
             <br />
             <div>
                 <Grid container spacing={4}>
-                    {data?.sort((a, b) => (a.roomNumber > b.roomNumber) - (a.roomNumber < b.roomNumber)).map(room => {
+                    {rooms?.sort((a, b) => (a.roomNumber > b.roomNumber) - (a.roomNumber < b.roomNumber)).map(room => {
                         return <Grid item sm={6} md={4} lg={3} container>
                             <RoomCard id={room.id} roomNumber={room.roomNumber} memo={room.memo} />
                         </Grid>

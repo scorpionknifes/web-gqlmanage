@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 
 import MenuAppBar from './components/MenuBar/MenuBar';
-import AuthProvider from './contexts/AuthContext';
 import DeviceChange from './components/Device/DeviceEdit';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
@@ -24,7 +23,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : "",
+      Authorization: token ? `Bearer ${token}` : "",
     }
   }
 });
@@ -38,7 +37,6 @@ function App() {
   return (
     <BrowserRouter>
       <ApolloProvider client={client}>
-        <AuthProvider>
           <MenuAppBar>
             <Switch>
               <Route exact path="/login" component={Login} />
@@ -55,7 +53,6 @@ function App() {
               <Route exact path="/device/edit/:id" component={EditDevice}/>
             </Switch>
           </MenuAppBar>
-        </AuthProvider>
       </ApolloProvider>
     </BrowserRouter>
   );
