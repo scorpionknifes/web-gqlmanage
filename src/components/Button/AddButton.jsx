@@ -6,7 +6,7 @@ const AddButton = (props) => {
     return (
         <Grid container spacing={1}>
             <Grid item>
-                <Button onClick={props.add} variant="contained" size="large" color="primary">Add</Button>
+                <Button component={Link} to={props.add} variant="contained" size="large" color="primary">Add</Button>
             </Grid>
         </Grid>
     )

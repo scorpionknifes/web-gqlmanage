@@ -47,7 +47,7 @@ const Room = () => {
         <br />
         <Typography variant="h4">Devices</Typography>
         <br />
-        <AddButton />
+        <AddButton add={'/device/add'}/>
         <br />
         <DeviceGrid data={room?.devices}/>
     </>

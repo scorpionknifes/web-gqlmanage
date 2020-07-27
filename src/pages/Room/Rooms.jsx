@@ -28,7 +28,7 @@ const Rooms = () => {
     return loading ? <Spinner/>:<>
         <Typography variant="h4">Rooms</Typography>
         <br />
-        <AddButton />
+        <AddButton add={'/room/add'}/>
         <br />
         <div>
             <Grid container spacing={4}>

@@ -18,15 +18,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Add = () => {
     const classes = useStyles()
-    /*
-        id: ID!
-        roomNumber: String!
-        memo: String!
-        devices: [Device!]!
-        username: String!
-        password: String!
-        createdDate:  Time!
-    */
 
     const [name, setName] = useState("")
     const [macAddress, setMacAddress] = useState("")
