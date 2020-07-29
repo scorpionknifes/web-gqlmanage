@@ -16,27 +16,21 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const DeviceEdit = ({ room }) => {
-    let { id } = useParams()
+const DeviceEdit = props => {
     const classes = useStyles()
-
-    const [roomNumber, setRoomNumber] = useState()
-    const [memo, setMemo] = useState()
-
-    useEffect(() => {
-        setMemo(room?.memo)
-        setRoomNumber(room?.roomNumber)
-    }, [room])
 
     return (
         <div className={classes.root}>
             <div>
-                <SimpleTextField name="ID" helper="database ID" disabled value={id} />
-                <SimpleTextField name="Room Number" helper="room number" required value={roomNumber} />
-                <SimpleTextField name="Memo" helper="memo (optional)" value={memo} />
-                <SimpleTextField name="Username" helper="" disabled value={room?.username} />
-                <SimpleTextField name="Password" helper="" disabled value={room?.password} />
-                <SimpleDateField name="Created Date" helper="" disabled value={room?.createdDate} />
+                <SimpleTextField name="ID" helper="database ID" disabled value={props.id} />
+                <SimpleTextField name="Room Number" helper="room number" disabled value={props.roomNumber} />
+                <SimpleTextField name="Name" helper="fully qualified name" required onChange={props.setName} value={props.name} />
+                <SimpleTextField name="Model" helper="model number" required onChange={props.setModel} value={props.model} />
+                <SimpleTextField name="MAC Address" helper="device mac address (optional)" onChange={props.setMacAddress} value={props.macAddress} />
+                <SimpleTextField name="Memo" helper="memo (optional)" onChange={props.setMemo} value={props.memo} />
+                <SimpleTextField name="Serial Number" helper="serial number" required onChange={props.setSerialNumber} value={props.serialNumber} />
+                <SimpleTextField name="Status" helper="status" onChange={props.setStatus} value={props.status} />
+                <SimpleTextField name="Type" helper="type" onChange={props.setType} value={props.type} />
             </div>
         </div>
     );

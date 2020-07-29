@@ -37,6 +37,7 @@ const EditRoom = () => {
             updateRoom(id: $id, input: $input){
                 id
                 memo
+                createdDate
             }
         }
     `, )
@@ -46,7 +47,7 @@ const EditRoom = () => {
             variables: {
                 id: id,
                 input: {
-                    memo: memo,
+                    memo: memo
                 }
             }
         })

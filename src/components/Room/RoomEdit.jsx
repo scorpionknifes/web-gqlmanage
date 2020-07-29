@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {SimpleDateField, SimpleSelectionField, SimpleTextField} from '../Form/SimpleFields'
+import { SimpleDateField, SimpleSelectionField, SimpleTextField } from '../Form/SimpleFields'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,11 +23,11 @@ const RoomEdit = props => {
     return (
         <div className={classes.root}>
             <div>
-                <SimpleTextField name="ID" helper="database ID" disabled value={props.id}/>
-                <SimpleTextField name="Room Number" helper="Room Number" disabled value={props.roomNumber}/>
-                <SimpleTextField name="Memo" helper="memo (optional)"onChange={e => props.setMemo(e.target.value)} value={props.memo}/>
-                <SimpleDateField name="Created Date" helper="" disabled value={props.createdDate}/>
-                <SimpleSelectionField/>
+                <SimpleTextField name="ID" helper="database ID" disabled value={props.id} />
+                <SimpleTextField name="Room Number" helper="Room Number" disabled value={props.roomNumber} />
+                <SimpleTextField name="Memo" helper="memo (optional)" onChange={e => props.setMemo(e.target.value)} value={props.memo} />
+                <SimpleDateField name="Created Date" helper="" disabled value={props.createdDate} />
+                <SimpleSelectionField />
             </div>
         </div>
     );
