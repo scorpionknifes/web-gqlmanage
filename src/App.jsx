@@ -10,6 +10,7 @@ import { setContext } from '@apollo/client/link/context';
 import Login from './pages/Login/Login';
 import { AddRoom, EditRoom, Rooms, Room } from './pages/Room'
 import { AddDevice, EditDevice, Devices, Device } from './pages/Device'
+import Email from './pages/Email/Email'
 
 const httpLink = createHttpLink({
     uri: process.env.REACT_APP_GRAPHQL_URL,
@@ -50,6 +51,9 @@ function App() {
                         <Route exact path="/device/add/:id" component={AddDevice} />
                         <Route exact path="/device/:id" component={Device} />
                         <Route exact path="/device/edit/:id" component={EditDevice} />
+
+                        <Route exact path="/emails" component={Email}/>
+                        <Route exact path="/email/:id" component={Email}/>
                     </Switch>
                 </MenuAppBar>
             </ApolloProvider>
