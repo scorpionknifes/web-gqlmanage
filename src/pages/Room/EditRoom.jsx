@@ -27,8 +27,9 @@ const EditRoom = () => {
     useEffect(()=>{
         if (!error && !loading && data) {
             console.log(data)
-            setRoom(data.room)
-            setMemo(data.memo)
+            const {room} = data
+            setRoom(room)
+            setMemo(room.memo)
         }
     },[data,loading,error])
 
@@ -40,7 +41,7 @@ const EditRoom = () => {
                 createdDate
             }
         }
-    `, )
+    ` )
     
     const save = () =>{
         updateRoom({
@@ -59,7 +60,7 @@ const EditRoom = () => {
         <br />
         <SaveButton back={`/room/${id}`} save={save} />
         <br />
-        <RoomEdit room={room} memo={memo} setMemo={setMemo}/>
+        <RoomEdit id={id} room={room} memo={memo} setMemo={setMemo}/>
     </>
 }
 

@@ -23,10 +23,10 @@ const RoomEdit = props => {
     return (
         <div className={classes.root}>
             <div>
-                <SimpleTextField name="ID" helper="database ID" disabled value={props.id} />
-                <SimpleTextField name="Room Number" helper="Room Number" disabled value={props.roomNumber} />
+                <SimpleTextField name="ID" helper="database ID" disabled value={props?.id} />
+                <SimpleTextField name="Room Number" helper="Room Number" disabled value={props.room?.roomNumber} />
                 <SimpleTextField name="Memo" helper="memo (optional)" onChange={e => props.setMemo(e.target.value)} value={props.memo} />
-                <SimpleDateField name="Created Date" helper="" disabled value={props.createdDate} />
+                <SimpleTextField name="Created Date" helper="" disabled value={props.room?.createdDate} />
                 <SimpleSelectionField />
             </div>
         </div>

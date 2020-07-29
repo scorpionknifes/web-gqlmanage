@@ -39,7 +39,7 @@ const EditDevice = () => {
             setDevice(device)
             setName(device.name)
             setModel(device.model)
-            setMacAddress(device.model)
+            setMacAddress(device.macAddress)
             setMemo(device.memo)
             setSerialNumber(device.serialNumber)
             setStatus(device.status)
@@ -47,7 +47,7 @@ const EditDevice = () => {
         }
     }, [data, loading, error])
 
-    const [updateRoom] = useMutation(gql`
+    const [updateDevice] = useMutation(gql`
         mutation updateDevice($id: ID!, $input: DeviceUpdate!) {
             updateDevice(id: $id, input: $input){
                 name
@@ -55,15 +55,14 @@ const EditDevice = () => {
                 macAddress
                 memo
                 serialNumber
-                status
-                createdDate
-                lastModified     
+                status 
+                type
             }
         }
-    `, )
+    `)
 
     const save = () => {
-        updateRoom({
+        updateDevice({
             variables: {
                 id: id,
                 input: {
@@ -73,10 +72,11 @@ const EditDevice = () => {
                     memo: memo,
                     serialNumber: serialNumber,
                     status: status,
+                    type: type,
                 }
             }
         })
-        history.push(`/room/${id}`)
+        history.push(`/device/${id}`)
     }
     return <>
         <Typography variant="h4">Edit - {device?.name}</Typography>

@@ -16,6 +16,9 @@ const Device = () => {
         query Device($id: ID!) {
             device(id: $id) {
                 ...DeviceFragment
+                room{
+                    id
+                }
             }
         }
         ${DeviceFragment}
@@ -31,7 +34,7 @@ const Device = () => {
     return loading ? <Spinner/>:<>
         <Typography variant="h4">Device - {device?.name}</Typography>
         <br />
-        <EditButton edit={`/device/edit/${id}`} back={`/room/${device?.room}`} />
+        <EditButton edit={`/device/edit/${id}`} back={`/room/${device?.room?.id}`} />
         <br />
         <DeviceView device={device}/>
     </>

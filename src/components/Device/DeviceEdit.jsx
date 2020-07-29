@@ -24,13 +24,13 @@ const DeviceEdit = props => {
             <div>
                 <SimpleTextField name="ID" helper="database ID" disabled value={props.id} />
                 <SimpleTextField name="Room Number" helper="room number" disabled value={props.roomNumber} />
-                <SimpleTextField name="Name" helper="fully qualified name" required onChange={props.setName} value={props.name} />
-                <SimpleTextField name="Model" helper="model number" required onChange={props.setModel} value={props.model} />
-                <SimpleTextField name="MAC Address" helper="device mac address (optional)" onChange={props.setMacAddress} value={props.macAddress} />
-                <SimpleTextField name="Memo" helper="memo (optional)" onChange={props.setMemo} value={props.memo} />
-                <SimpleTextField name="Serial Number" helper="serial number" required onChange={props.setSerialNumber} value={props.serialNumber} />
-                <SimpleTextField name="Status" helper="status" onChange={props.setStatus} value={props.status} />
-                <SimpleTextField name="Type" helper="type" onChange={props.setType} value={props.type} />
+                <SimpleTextField name="Name" helper="fully qualified name" required onChange={e => props.setName(e.target.value)} value={props.name} />
+                <SimpleTextField name="Model" helper="model number" required onChange={e => props.setModel(e.target.value)} value={props.model} />
+                <SimpleTextField name="MAC Address" helper="device mac address (optional)" onChange={e => {formatMAC(e); props.setMacAddress(e.target.value)}} value={props.macAddress} />
+                <SimpleTextField name="Memo" helper="memo (optional)" onChange={e => props.setMemo(e.target.value)} value={props.memo} />
+                <SimpleTextField name="Serial Number" helper="serial number" required onChange={e => props.setSerialNumber(e.target.value)} value={props.serialNumber} />
+                <SimpleTextField name="Status" helper="status" onChange={e => props.setStatus(e.target.value)} value={props.status} />
+                <SimpleTextField name="Type" helper="type" onChange={e => props.setType(e.target.value)} value={props.type} />
             </div>
         </div>
     );
