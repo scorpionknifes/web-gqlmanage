@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const RoomEdit = ({ room }) => {
+const DeviceEdit = ({ room }) => {
     let { id } = useParams()
     const classes = useStyles()
 
@@ -53,4 +53,4 @@ function formatMAC(e) {
     e.target.value = str.slice(0, 17);
 };
 
-export default RoomEdit
+export default DeviceEdit

@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import RoomEdit from '../../components/Device/DeviceEdit'
+import { useParams, useHistory } from 'react-router-dom'
+import RoomEdit from '../../components/Room/RoomEdit'
 import { Typography } from '@material-ui/core'
 import SaveButton from '../../components/Button/SaveButton'
 import Spinner from '../../components/Spinner/Spinner'
 import RoomFragment from '../../fragments/RoomFragment'
-import { useQuery, gql } from '@apollo/client'
+import { useQuery, gql, useMutation } from '@apollo/client'
 
 const EditRoom = () => {
-    let { id } = useParams();
+    let { id } = useParams()
+    const history = useHistory()
     const [room, setRoom] = useState()
-    
+    const [memo, setMemo] = useState("")
+
     const { loading, error, data } = useQuery(gql`
         query Room($id: ID!) {
             room(id: $id) {
@@ -26,15 +28,37 @@ const EditRoom = () => {
         if (!error && !loading && data) {
             console.log(data)
             setRoom(data.room)
+            setMemo(data.memo)
         }
     },[data,loading,error])
+
+    const [updateRoom] = useMutation( gql`
+        mutation updateRoom($id: ID!, $input: RoomUpdate!) {
+            updateRoom(id: $id, input: $input){
+                id
+                memo
+            }
+        }
+    `, )
+    
+    const save = () =>{
+        updateRoom({
+            variables: {
+                id: id,
+                input: {
+                    memo: memo,
+                }
+            }
+        })
+        history.push(`/room/${id}`)
+    }
 
     return loading ? <Spinner /> : <>
         <Typography variant="h4">Room {room?.roomNumber}</Typography>
         <br />
-        <SaveButton back={`/room/${id}`} />
+        <SaveButton back={`/room/${id}`} save={save} />
         <br />
-        <RoomEdit room={room}/>
+        <RoomEdit room={room} memo={memo} setMemo={setMemo}/>
     </>
 }
 
