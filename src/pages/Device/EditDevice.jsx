@@ -9,12 +9,12 @@ import { useQuery, gql, useMutation } from '@apollo/client';
 const EditDevice = () => {
     let { id } = useParams();
     const history = useHistory()
-    const [device, setDevice] = useState()
-    const [name, setName] = useState()
-    const [model, setModel] = useState()
-    const [macAddress, setMacAddress] = useState()
-    const [memo, setMemo] = useState()
-    const [serialNumber, setSerialNumber] = useState()
+    const [device, setDevice] = useState("")
+    const [name, setName] = useState("")
+    const [model, setModel] = useState("")
+    const [macAddress, setMacAddress] = useState("")
+    const [memo, setMemo] = useState("")
+    const [serialNumber, setSerialNumber] = useState("")
     const [status, setStatus] = useState(0)
     const [type, setType] = useState(0)
 

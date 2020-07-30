@@ -11,6 +11,7 @@ import Login from './pages/Login/Login';
 import { AddRoom, EditRoom, Rooms, Room } from './pages/Room'
 import { AddDevice, EditDevice, Devices, Device } from './pages/Device'
 import Email from './pages/Email/Email'
+import { User, AddUser, Users, EditUser } from './pages/User';
 
 const httpLink = createHttpLink({
     uri: process.env.REACT_APP_GRAPHQL_URL,
@@ -51,6 +52,11 @@ function App() {
                         <Route exact path="/device/add/:id" component={AddDevice} />
                         <Route exact path="/device/:id" component={Device} />
                         <Route exact path="/device/edit/:id" component={EditDevice} />
+
+                        <Route exact path="/users" component={Users}/>
+                        <Route exact path="/user/:id" component={User}/>
+                        <Route exact path="/user/add" component={AddUser}/>
+                        <Route exact path="/user/edit/:id" component={EditUser}/>
 
                         <Route exact path="/emails" component={Email}/>
                         <Route exact path="/email/:id" component={Email}/>

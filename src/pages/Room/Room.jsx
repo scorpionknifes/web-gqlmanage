@@ -49,7 +49,7 @@ const Room = () => {
         <br />
         <AddButton add={'/device/add'}/>
         <br />
-        <DeviceGrid data={room?.devices}/>
+        <DeviceGrid devices={room?.devices}/>
     </>
 }
 

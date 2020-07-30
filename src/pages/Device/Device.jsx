@@ -18,6 +18,7 @@ const Device = () => {
                 ...DeviceFragment
                 room{
                     id
+                    roomNumber
                 }
             }
         }
@@ -31,6 +32,7 @@ const Device = () => {
             setDevice(data.device)
         }
     },[data,loading,error])
+    
     return loading ? <Spinner/>:<>
         <Typography variant="h4">Device - {device?.name}</Typography>
         <br />

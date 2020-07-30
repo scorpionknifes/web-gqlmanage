@@ -9,6 +9,7 @@ export default gql`
     memo
     serialNumber
     status
+    type
     createdDate
     lastModified
   }

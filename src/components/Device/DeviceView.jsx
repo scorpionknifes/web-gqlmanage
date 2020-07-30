@@ -32,6 +32,18 @@ const DeviceView = ({device}) => {
             </TableHead>
             <TableBody>
                 <TableRow>
+                    <TableCell><b>Room Number</b></TableCell>
+                    <TableCell>{device?.room?.roomNumber}</TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell><b>Name</b></TableCell>
+                    <TableCell>{device?.name}</TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell><b>Model</b></TableCell>
+                    <TableCell>{device?.model}</TableCell>
+                </TableRow>
+                <TableRow>
                     <TableCell><b>MAC Address</b></TableCell>
                     <TableCell>{device?.macAddress}</TableCell>
                 </TableRow>
@@ -44,8 +56,12 @@ const DeviceView = ({device}) => {
                     <TableCell>{device?.serialNumber}</TableCell>
                 </TableRow>
                 <TableRow>
-                    <TableCell><b>status</b></TableCell>
+                    <TableCell><b>Status</b></TableCell>
                     <TableCell>{device?.status}</TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell><b>Type</b></TableCell>
+                    <TableCell>{device?.type}</TableCell>
                 </TableRow>
                 <TableRow>
                     <TableCell><b>Created Date</b></TableCell>
