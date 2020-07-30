@@ -4,7 +4,7 @@ import { Typography } from '@material-ui/core';
 import CreateButton from '../../components/Button/CreateButton';
 import { useQuery, gql } from '@apollo/client';
 import UserFragment from '../../fragments/UserFragment';
-import { UserTable } from '../../components/User';
+import { UserTable, UserInfo } from '../../components/User';
 
 const Users = () => {
 
@@ -27,6 +27,10 @@ const Users = () => {
     },[data,loading,error])
 
     return <>
+        <Typography variant="h4">Info</Typography>
+        <br />
+        <UserInfo user={users?users[0]:null}/>
+        <br />
         <Typography variant="h4">Users</Typography>
         <br />
         <UserTable users={users}/>

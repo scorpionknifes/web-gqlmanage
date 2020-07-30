@@ -1,21 +1,43 @@
-import React, { useEffect } from 'react'
-import { gql, useSubscription } from '@apollo/client'
+import React, { useEffect, useState } from 'react'
+import { gql, useSubscription, useQuery } from '@apollo/client'
+import EmailTable from '../../components/Email/EmailTable';
+import { EmailFragment } from '../../fragments'
 
 const Emails = () => {
 
-    const { loading, error, data } = useQuery(gql`
-        query Room($id: ID!) {
-            room(id: $id) {
-                ...RoomFragment
+    const [emails, setEmails] = useState([])
+
+    const { subscribeToMore, loading, data, error } = useQuery(gql`
+        query Emails {
+            emails {
+                ...EmailFragment
             }
         }
-        ${RoomFragment}
-    `,{
-        variables: { id: id }
-    })
+        ${EmailFragment}
+    `)
 
+    useEffect(() => {
+        subscribeToMore({
+            document: SUBSCRIPTION,
+            updateQuery(prev, { subscriptionData }) {
+                // `prev` already contains the new data
+                console.log(subscriptionData.data.newEmails)
+                console.log(prev)
 
-    const { data, error, loading } = useSubscription(gql`
+                
+                return { emails:[subscriptionData.data.newEmails, ...prev.emails] }
+             }
+        })
+    },[])
+
+    useEffect(() => {
+        if (!error && !loading && data) {
+            console.log(data.emails)
+            setEmails(data.emails)
+        }
+    }, [data, loading, error])
+
+    const SUBSCRIPTION = gql`
         subscription {
             newEmails{
                 id
@@ -25,14 +47,16 @@ const Emails = () => {
                 createdDate
             }
         }`
-    );
 
-    useEffect(()=>{ 
-        console.log(loading)
-        console.log(data)
-        console.log(error)
-    },[data, loading, error])
-    return <>Test</>
+        const sub = useSubscription(SUBSCRIPTION)
+
+    useEffect(()=>{
+        console.log(sub)
+    }, [sub])
+
+    return <>
+        <EmailTable emails={emails} />
+    </>
 }
 
 export default Emails
