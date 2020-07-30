@@ -3,6 +3,7 @@ import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
 import RouterIcon from '@material-ui/icons/Router'
 import PeopleIcon from '@material-ui/icons/People'
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
+import EmailIcon from '@material-ui/icons/Email'
 import {Link} from 'react-router-dom'
 import { List, ListItem, ListItemIcon, ListItemText, Divider } from '@material-ui/core'
 
@@ -24,7 +25,10 @@ export default () => {
             name: "User",
             icon: <PeopleIcon/>,
             location:"/users"
-
+        },{
+            name: "Email",
+            icon: <EmailIcon/>,
+            location:"/emails"
         }
     ]
 

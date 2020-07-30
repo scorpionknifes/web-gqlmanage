@@ -41,7 +41,7 @@ const EditRoom = () => {
                 createdDate
             }
         }
-    ` )
+    `)
     
     const save = () =>{
         updateRoom({
