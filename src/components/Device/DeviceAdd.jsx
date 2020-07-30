@@ -15,22 +15,19 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Add = () => {
+const Add = props => {
     const classes = useStyles()
-
-    const [room, setRoom] = useState("")
-    const [name, setName] = useState("")
-    const [macAddress, setMacAddress] = useState("")
-    const [memo, setMemo] = useState("")
-    const [sn, setSN] = useState("")
 
     return (
         <div className={classes.root}>
             <div>
-                <SimpleTextField name="Name" helper="name description (optional)" value={name}/>
-                <SimpleTextField name="MAC Address" helper="mac address" required value={macAddress}/>
-                <SimpleTextField name="Memo" helper="memo (optional)" value={memo}/>
-                <SimpleTextField name="Serial Number" helper="serial number" value={sn} required />
+                <SimpleTextField name="Name" helper="fully qualified name" required onChange={e => props.setName(e.target.value)} value={props.name} />
+                <SimpleTextField name="Model" helper="model number" required onChange={e => props.setModel(e.target.value)} value={props.model} />
+                <SimpleTextField name="MAC Address" helper="device mac address (optional)" required onChange={e => {formatMAC(e); props.setMacAddress(e.target.value)}} value={props.macAddress} />
+                <SimpleTextField name="Memo" helper="memo (optional)" required onChange={e => props.setMemo(e.target.value)} value={props.memo} />
+                <SimpleTextField name="Serial Number" helper="serial number" required onChange={e => props.setSerialNumber(e.target.value)} value={props.serialNumber} />
+                <SimpleTextField name="Status" helper="status" required onChange={e => props.setStatus(e.target.value)} value={props.status} />
+                <SimpleTextField name="Type" helper="type" required onChange={e => props.setType(e.target.value)} value={props.type} />
             </div>
         </div>
     );

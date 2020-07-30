@@ -8,32 +8,9 @@ import { useQuery, gql } from '@apollo/client'
 import { UserView } from '../../components/User'
 
 const User = () => {
-    let { id } = useParams()
-    const [user, setUser] = useState()
 
-    const { loading, error, data } = useQuery(gql`
-        query User($id: ID!) {
-            user(id: $id) {
-                ...UserFragment
-            }
-        }
-        ${UserFragment}
-    `,{
-        variables: { id: id }
-    })
-    
-    useEffect(()=>{
-        if (!error && !loading && data) {
-            setUser(data.user)
-        }
-    },[data,loading,error])
-
-    return loading ? <Spinner/>:<>
-        <Typography variant="h4">User</Typography>
-        <br />
-        <EditButton edit={`/user/edit/${id}`} back={`/users`} />
-        <br />
-        <UserView user={user}/>
+    return <>
+        <Typography variant="h4">DISABLED</Typography>
     </>
 }
 
