@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom';
-import { Typography } from '@material-ui/core';
-import CreateButton from '../../components/Button/CreateButton';
-import { useQuery, gql } from '@apollo/client';
-import UserFragment from '../../fragments/UserFragment';
-import { UserTable, UserInfo } from '../../components/User';
+import { useParams } from 'react-router-dom'
+import { Typography } from '@material-ui/core'
+import CreateButton from '../../components/Button/CreateButton'
+import { useQuery, gql } from '@apollo/client'
+import UserFragment from '../../fragments/UserFragment'
+import { UserTable, UserInfo } from '../../components/User'
 
 const Users = () => {
 

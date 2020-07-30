@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { TableContainer, TableHead, TableRow, TableCell, TableBody, Paper, Table, Typography } from '@material-ui/core'
+import { typestring, status } from '../Device/DeviceVar'
 
 const useStyles = makeStyles({
     deviceviewcontainer: {
@@ -57,11 +58,11 @@ const DeviceView = ({device}) => {
                 </TableRow>
                 <TableRow>
                     <TableCell><b>Status</b></TableCell>
-                    <TableCell>{device?.status}</TableCell>
+                    <TableCell>{status[device?.status]}</TableCell>
                 </TableRow>
                 <TableRow>
                     <TableCell><b>Type</b></TableCell>
-                    <TableCell>{device?.type}</TableCell>
+                    <TableCell>{typestring[device?.type]}</TableCell>
                 </TableRow>
                 <TableRow>
                     <TableCell><b>Created Date</b></TableCell>

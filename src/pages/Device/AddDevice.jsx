@@ -53,7 +53,7 @@ const AddDevice = () => {
         <Typography variant="h4">Add Device - Room {data?.room.roomNumber}</Typography>
         <br />
         <form onSubmit={createDevice}>
-            <CreateButton />
+            <CreateButton back={`/room/${id}`} />
             <br />
             <DeviceAdd
                 name={name} setName={setName}

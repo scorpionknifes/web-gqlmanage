@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {SimpleDateField, SimpleSelectionField, SimpleTextField} from '../Form/SimpleFields'
+import StatusSelect from '../Form/StatusSelect';
+import TypeSelect from '../Form/TypeSelect';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,8 +28,8 @@ const Add = props => {
                 <SimpleTextField name="MAC Address" helper="device mac address (optional)" required onChange={e => {formatMAC(e); props.setMacAddress(e.target.value)}} value={props.macAddress} />
                 <SimpleTextField name="Memo" helper="memo (optional)" required onChange={e => props.setMemo(e.target.value)} value={props.memo} />
                 <SimpleTextField name="Serial Number" helper="serial number" required onChange={e => props.setSerialNumber(e.target.value)} value={props.serialNumber} />
-                <SimpleTextField name="Status" helper="status" required onChange={e => props.setStatus(e.target.value)} value={props.status} />
-                <SimpleTextField name="Type" helper="type" required onChange={e => props.setType(e.target.value)} value={props.type} />
+                <StatusSelect set={props.setStatus} value={props.status}/>
+                <TypeSelect set={props.setType} value={props.type}/>
             </div>
         </div>
     );

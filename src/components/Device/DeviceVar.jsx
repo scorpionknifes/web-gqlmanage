@@ -20,4 +20,12 @@ const type = [
     clipsal
 ]  
 
-export {status,type}
+const typestring = [
+    "Undefined",
+    "Controller",
+    "Alexa",
+    "Z-Wave",
+    "Clipsal"
+]
+
+export {status,type,typestring}

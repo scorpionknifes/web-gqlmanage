@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {SimpleDateField, SimpleSelectionField, SimpleTextField} from '../Form/SimpleFields'
-import { SaveButton } from '../Form/SimpleButtons';
+import { SimpleDateField, SimpleSelectionField, SimpleTextField } from '../Form/SimpleFields'
+import { Typography } from '@material-ui/core';
+import { DeviceAdd } from '../Device';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,38 +17,31 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Add = () => {
+const RoomAdd = props => {
     const classes = useStyles()
 
-    const [name, setName] = useState("")
-    const [macAddress, setMacAddress] = useState("")
-    const [sn, setSN] = useState("")
-    const [memo, setMemo] = useState("")
-
-    return (
+    return (<>
+        <Typography variant="h5">Room</Typography>
+        <br />
         <div className={classes.root}>
-            <>
-                <SaveButton/>
-            </>
-            <div>
-                <SimpleTextField name="Name" helper="name description (optional)" value={name}/>
-                <SimpleTextField name="MAC Address" helper="mac address" required value={macAddress}/>
-                <SimpleTextField name="Memo" helper="memo (optional)" value={memo}/>
-                <SimpleTextField name="Serial Number" helper="serial number" value={sn} required />
-            </div>
+                    <SimpleTextField name="Room Number" helper="Room Number" required onChange={e => props.setRoomNumber(e.target.value)} value={props.room?.roomNumber} />
+                    <SimpleTextField name="Memo" helper="memo (optional)" onChange={e => props.setMemo(e.target.value)} value={props.memo} />
         </div>
+        <br />
+        <Typography variant="h5">Device</Typography>
+        <br />
+        <DeviceAdd
+            name={props.name} setName={props.setName}
+            model={props.model} setModel={props.setModel}
+            macAddress={props.macAddress} setMacAddress={props.setMacAddress}
+            memo={props.memo} setMemo={props.setMemo}
+            serialNumber={props.serialNumber} setSerialNumber={props.setSerialNumber}
+            status={props.status} setStatus={props.setStatus}
+            type={props.type} setType={props.setType}
+        />
+        <br />
+        </>
     );
 }
 
-function formatMAC(e) {
-    var r = /([a-f0-9]{2})([a-f0-9]{2})/i,
-        str = e.target.value.replace(/[^a-f0-9]/ig, "");
-
-    while (r.test(str)) {
-        str = str.replace(r, '$1' + ':' + '$2');
-    }
-
-    e.target.value = str.slice(0, 17);
-};
-
-export default Add
+export default RoomAdd
