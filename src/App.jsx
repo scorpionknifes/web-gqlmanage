@@ -87,9 +87,8 @@ function App() {
                         <Route exact path="/user/edit/:id" component={EditUser} />
 
                         <Route exact path="/emails" component={Emails} />
-                        
-                        <Redirect to="/rooms" />
 
+                        <Redirect to="/rooms" />
                     </Switch>
                 </MenuAppBar>
             </ApolloProvider>

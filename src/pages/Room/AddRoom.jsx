@@ -28,37 +28,21 @@ function getSteps() {
     return ['Enter Room Details', 'OpenHAB Cloud', 'Alexa', 'Verify Email'];
 }
 
-function getStepContent(step) {
-    switch (step) {
-        case 0:
-            return <RoomAdd />
-        case 1:
-            return 'Sign up to OpenHAB Cloud on custom server'
-        case 2:
-            return 'Sign up to Alexa'
-        case 3:
-            return 'Verify Email'
-        default:
-            return 'Unknown step'
-    }
-}
-
 export default function HorizontalLinearStepper() {
 
     const classes = useStyles();
     const [activeStep, setActiveStep] = useState(0);
-    const [skipped, setSkipped] = useState(new Set());
     const steps = getSteps();
 
     //fields
 
     const [roomNumber, setRoomNumber] = useState("")
-
+    const [memo, setMemo] = useState("")
 
     const [name, setName] = useState("")
     const [model, setModel] = useState("")
     const [macAddress, setMacAddress] = useState("")
-    const [memo, setMemo] = useState("")
+    const [memoController, setMemoController] = useState("")
     const [serialNumber, setSerialNumber] = useState("")
     const [status, setStatus] = useState(0)
     const [type, setType] = useState(0)
@@ -81,7 +65,33 @@ export default function HorizontalLinearStepper() {
         return <Login error={error} />
     }
 
-    const handleNext = () => {
+    const getStepContent = step => {
+        switch (step) {
+            case 0:
+                return <RoomAdd 
+                    roomNumber={roomNumber} setRoomNumber={setRoomNumber}
+                    memo={memo} setMemo={setMemo}
+                    name={name} setName={setName}
+                    model={model} setModel={setModel}
+                    macAddress={macAddress} setMacAddress={setMacAddress}
+                    memoController={memoController} setMemoController={setMemoController}
+                    serialNumber={serialNumber} setSerialNumber={setSerialNumber}
+                    status={status} setStatus={setStatus}
+                    type={type} setType={setType}                />
+            case 1:
+                return 'Sign up to OpenHAB Cloud on custom server'
+            case 2:
+                return 'Sign up to Alexa'
+            case 3:
+                return 'Verify Email'
+            default:
+                return 'Unknown step'
+        }
+    }
+    
+
+    const handleNext = event => {
+        event.preventDefault()
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
 
@@ -112,20 +122,20 @@ export default function HorizontalLinearStepper() {
                         <Typography className={classes.instructions}>All steps completed - you&apos;re finished</Typography>
                         <Button onClick={handleReset} className={classes.button}>Reset</Button>
                     </div>) : (
-                        <div>
+                        <form onSubmit={handleNext}>
                             <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
                             <div>
                                 <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>Back</Button>
                                 <Button
                                     variant="contained"
                                     color="primary"
-                                    onClick={handleNext}
+                                    type="submit"
                                     className={classes.button}
                                 >
                                     {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                                 </Button>
                             </div>
-                        </div>
+                        </form>
                     )}
             </div>
         </div>

@@ -15,7 +15,7 @@ const Login = props => {
     `)
 
     const handleLogin = async event => {
-        event.preventDefault();
+        event.preventDefault()
         try {
             const { data } = await login({
                 variables: {
