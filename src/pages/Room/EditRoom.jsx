@@ -6,6 +6,7 @@ import SaveButton from '../../components/Button/SaveButton'
 import Spinner from '../../components/Spinner/Spinner'
 import RoomFragment from '../../fragments/RoomFragment'
 import { useQuery, gql, useMutation } from '@apollo/client'
+import Login from '../Login/Login'
 
 const EditRoom = () => {
     let { id } = useParams()
@@ -56,7 +57,7 @@ const EditRoom = () => {
     }
 
     if (error){
-        return `Error! ${error}`
+        return <Login error={error}/>
     }
 
     return <>

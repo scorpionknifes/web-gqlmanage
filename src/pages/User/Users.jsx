@@ -4,6 +4,7 @@ import { useQuery, gql } from '@apollo/client'
 import UserFragment from '../../fragments/UserFragment'
 import { UserTable, UserInfo } from '../../components/User'
 import Spinner from '../../components/Spinner/Spinner'
+import Login from '../Login/Login'
 
 const Users = () => {
     const { loading, error, data } = useQuery(gql`
@@ -20,7 +21,7 @@ const Users = () => {
     }
 
     if (error){
-        return `Error! ${error}`
+        return <Login error={error}/>
     }
 
     return <>

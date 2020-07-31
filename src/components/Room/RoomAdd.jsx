@@ -28,7 +28,7 @@ const RoomAdd = props => {
             <SimpleTextField name="Memo" helper="memo (optional)" onChange={e => props.setMemo(e.target.value)} value={props.memo} />
         </div>
         <br />
-        <Typography variant="h5">Device</Typography>
+        <Typography variant="h5">Controller</Typography>
         <br />
         <DeviceAdd
             name={props.name} setName={props.setName}

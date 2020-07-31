@@ -3,6 +3,7 @@ import { gql, useQuery } from '@apollo/client'
 import EmailTable from '../../components/Email/EmailTable';
 import { EmailFragment } from '../../fragments'
 import Spinner from '../../components/Spinner/Spinner';
+import Login from '../Login/Login';
 
 const Emails = () => {
     const { subscribeToMore, loading, data, error } = useQuery(gql`
@@ -37,7 +38,7 @@ const Emails = () => {
     }
 
     if (error){
-        return `Error! ${error}`
+        return <Login error={error}/>
     }
 
     return <>

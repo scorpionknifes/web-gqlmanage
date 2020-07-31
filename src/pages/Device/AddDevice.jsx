@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom';
-import { Typography } from '@material-ui/core';
-import CreateButton from '../../components/Button/CreateButton';
-import { RoomFragment } from '../../fragments';
-import { useQuery, gql, useMutation } from '@apollo/client';
-import Spinner from '../../components/Spinner/Spinner';
-import { DeviceAdd } from '../../components/Device';
+import { useParams } from 'react-router-dom'
+import { Typography } from '@material-ui/core'
+import CreateButton from '../../components/Button/CreateButton'
+import { RoomFragment } from '../../fragments'
+import { useQuery, gql, useMutation } from '@apollo/client'
+import Spinner from '../../components/Spinner/Spinner'
+import { DeviceAdd } from '../../components/Device'
+import Login from '../Login/Login'
 
 const AddDevice = () => {
     let { id } = useParams()
@@ -52,7 +53,7 @@ const AddDevice = () => {
         return <Spinner />
     }
     if (error){
-        return `Error! ${error}`
+        return <Login error={error}/>
     }
 
     return <>

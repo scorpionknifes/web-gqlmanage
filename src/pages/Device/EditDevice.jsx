@@ -6,6 +6,7 @@ import { DeviceEdit } from '../../components/Device'
 import { Typography } from '@material-ui/core'
 import { useQuery, gql, useMutation } from '@apollo/client'
 import Spinner from '../../components/Spinner/Spinner'
+import Login from '../Login/Login'
 
 const EditDevice = () => {
     let { id } = useParams();
@@ -82,7 +83,7 @@ const EditDevice = () => {
     }
 
     if (error){
-        return `Error! ${error}`
+        return <Login error={error} />
     }
 
     return <>

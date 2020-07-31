@@ -2,7 +2,7 @@ import React from 'react'
 import './App.css'
 
 import MenuAppBar from './components/MenuBar/MenuBar'
-import { BrowserRouter, Switch, Route } from "react-router-dom"
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom"
 import { getMainDefinition } from '@apollo/client/utilities'
 import { split, ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
@@ -87,6 +87,9 @@ function App() {
                         <Route exact path="/user/edit/:id" component={EditUser} />
 
                         <Route exact path="/emails" component={Emails} />
+                        
+                        <Redirect to="/rooms" />
+
                     </Switch>
                 </MenuAppBar>
             </ApolloProvider>

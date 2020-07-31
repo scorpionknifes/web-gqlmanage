@@ -4,6 +4,7 @@ import DeviceGrid from '../../components/Device/DeviceGrid'
 import DeviceFragment from '../../fragments/DeviceFragment'
 import Spinner from '../../components/Spinner/Spinner'
 import { useQuery, gql } from '@apollo/client'
+import Login from '../Login/Login'
 
 const Devices = () => {
     const { loading, error, data } = useQuery(gql`
@@ -20,7 +21,7 @@ const Devices = () => {
     }
 
     if (error){
-        return `Error! ${error}`
+        return <Login error={error}/>
     }
 
     return <>

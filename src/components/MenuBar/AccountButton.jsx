@@ -14,6 +14,12 @@ export default (props) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const handleLogout = ()=>{
+        localStorage.removeItem("token")
+        window.location.reload()
+    }
+
     return (
         <div>
             <IconButton
@@ -40,8 +46,7 @@ export default (props) => {
                 open={open}
                 onClose={handleClose}
             >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
         </div>
     )

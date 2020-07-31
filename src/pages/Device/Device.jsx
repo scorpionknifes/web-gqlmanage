@@ -6,6 +6,7 @@ import { Typography } from '@material-ui/core'
 import DeviceFragment from '../../fragments/DeviceFragment'
 import Spinner from '../../components/Spinner/Spinner'
 import { useQuery, gql } from '@apollo/client'
+import Login from '../Login/Login'
 
 
 const Device = () => {
@@ -27,7 +28,7 @@ const Device = () => {
     }
 
     if (error) {
-        return `Error! ${error}`
+        return <Login error={error}/>
     }
     
     return <>

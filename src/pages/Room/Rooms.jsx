@@ -5,6 +5,7 @@ import AddButton from '../../components/Button/AddButton'
 import { useQuery, gql } from '@apollo/client'
 import Spinner from '../../components/Spinner/Spinner'
 import RoomFragment from '../../fragments/RoomFragment'
+import Login from '../Login/Login'
 
 const Rooms = () => {
     const { loading, error, data } = useQuery(gql`
@@ -21,7 +22,7 @@ const Rooms = () => {
     }
 
     if (error){
-        return `Error! ${error}`
+        return <Login error={error}/>
     }
 
     return <>
