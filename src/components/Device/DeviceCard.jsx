@@ -37,7 +37,7 @@ const DeviceCard = (props) => {
                     <Typography gutterBottom variant="h5" component="h2">
                         {props.name}
                     </Typography>
-                    <Typography variant="body3" color="textSecondary" component="p">
+                    <Typography variant="body1" color="textSecondary" component="p">
                         {props.model}
                     </Typography>
                     <br />

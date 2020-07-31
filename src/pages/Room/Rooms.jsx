@@ -33,7 +33,7 @@ const Rooms = () => {
         <div>
             <Grid container spacing={4}>
                 {rooms?.map(room => {
-                    return <Grid item sm={6} md={4} lg={3} container>
+                    return <Grid key={room.id} item sm={6} md={4} lg={3} container>
                         <RoomCard id={room.id} roomNumber={room.roomNumber} memo={room.memo} />
                     </Grid>
                 })}

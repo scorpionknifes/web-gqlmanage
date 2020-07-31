@@ -13,7 +13,7 @@ const SimpleSelectionField = (props) => {
             >
                 {
                     props.selections?.map(item => {
-                        return <MenuItem value={item.value}>item.name</MenuItem>
+                        return <MenuItem key={item.value}  value={item.value}>item.name</MenuItem>
                     })
                 }
             </Select>
