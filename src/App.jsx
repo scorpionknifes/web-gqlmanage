@@ -27,38 +27,16 @@ const subscriptionClient = new SubscriptionClient(
     "ws://localhost:8000/query",
     {
         reconnect: true,
-        connectionParams: () => {
-            console.log("calling connection params callback");
-            return {
-                foo: "BAR",
-            }
-        }
     },
     null,
     [ "graphql-ws", localStorage.getItem('token') ])
 
 const wsLink = new WebSocketLink(subscriptionClient);
 
-/*
-const wsLink = new WebSocketLink({
-    uri: `ws://localhost:8000/query`,
-    options: {
-        reconnect: true,
-        connectionParams: {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-              },
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-            authToken: localStorage.getItem('token')
-        },
-    }
-});*/
-
 const authLink = setContext((_, { headers }) => {
     // get the authentication token from local storage if it exists
     const token = localStorage.getItem('token');
     // return the headers to the context so httpLink can read them
-    console.log(headers)
     return {
         headers: {
             ...headers,

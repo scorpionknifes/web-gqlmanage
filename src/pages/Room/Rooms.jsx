@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Grid, Typography } from '@material-ui/core'
 import RoomCard from '../../components/Room/RoomCard'
 import AddButton from '../../components/Button/AddButton'
@@ -7,9 +7,6 @@ import Spinner from '../../components/Spinner/Spinner'
 import RoomFragment from '../../fragments/RoomFragment'
 
 const Rooms = () => {
-
-    const [rooms, setRooms] = useState()
-
     const { loading, error, data } = useQuery(gql`
         query Rooms {
             rooms {
@@ -19,20 +16,22 @@ const Rooms = () => {
         ${RoomFragment}
     `)
 
-    useEffect(() => {
-        if (!error && !loading && data) {
-            setRooms(data.rooms)
-        }
-    }, [data, error, loading])
+    if (loading){
+        return <Spinner/>
+    }
 
-    return loading ? <Spinner/>:<>
+    if (error){
+        return `Error! ${error}`
+    }
+
+    return <>
         <Typography variant="h4">Rooms</Typography>
         <br />
         <AddButton add={'/room/add'}/>
         <br />
         <div>
             <Grid container spacing={4}>
-                {rooms?.map(room => {
+                {data?.rooms?.map(room => {
                     return <Grid key={room.id} item sm={6} md={4} lg={3} container>
                         <RoomCard id={room.id} roomNumber={room.roomNumber} memo={room.memo} />
                     </Grid>

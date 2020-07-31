@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom'
 import { RoomView } from '../../components/Room'
 import EditButton from '../../components/Button/EditButton'
@@ -13,7 +13,6 @@ import { useQuery, gql } from '@apollo/client'
 
 const Room = () => { 
     let { id } = useParams()
-    const [room, setRoom] = useState()
     
     const { loading, error, data } = useQuery(gql`
         query Room($id: ID!) {
@@ -30,26 +29,26 @@ const Room = () => {
         variables: { id: id }
     })
 
-    useEffect(()=>{
-        if (!error && !loading && data) {
-            console.log(data)
-            setRoom(data.room)
-        }
-    },[data, error, loading])
+    if (loading){
+        return <Spinner/>
+    }
 
+    if (error){
+        return `Error! ${error}`
+    }
 
-    return loading ? <Spinner/>:<>
-        <Typography variant="h4">Room {room?.roomNumber}</Typography>
+    return <>
+        <Typography variant="h4">Room {data?.room?.roomNumber}</Typography>
         <br />
         <EditButton edit={`/room/edit/${id}`} back={`/rooms`} />
         <br />
-        <RoomView room={room}/>
+        <RoomView room={data?.room}/>
         <br />
         <Typography variant="h4">Devices</Typography>
         <br />
         <AddButton add={`/device/add/${id}`}/>
         <br />
-        <DeviceGrid devices={room?.devices}/>
+        <DeviceGrid devices={data?.room?.devices}/>
     </>
 }
 

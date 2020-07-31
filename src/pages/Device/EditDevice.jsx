@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom'
 import DeviceFragment from '../../fragments/DeviceFragment'
-import SaveButton from '../../components/Button/SaveButton';
-import { DeviceEdit } from '../../components/Device';
-import { Typography } from '@material-ui/core';
-import { useQuery, gql, useMutation } from '@apollo/client';
+import SaveButton from '../../components/Button/SaveButton'
+import { DeviceEdit } from '../../components/Device'
+import { Typography } from '@material-ui/core'
+import { useQuery, gql, useMutation } from '@apollo/client'
+import Spinner from '../../components/Spinner/Spinner'
 
 const EditDevice = () => {
     let { id } = useParams();
@@ -22,9 +23,6 @@ const EditDevice = () => {
         query Device($id: ID!) {
             device(id: $id) {
                 ...DeviceFragment
-                room{
-                    roomNumber
-                }
             }
         }
         ${DeviceFragment}
@@ -33,9 +31,8 @@ const EditDevice = () => {
     })
 
     useEffect(() => {
-        if (!error && !loading && data) {
+        if (data) {
             const { device } = data
-            console.log(device)
             setDevice(device)
             setName(device.name)
             setModel(device.model)
@@ -45,11 +42,12 @@ const EditDevice = () => {
             setStatus(device.status)
             setType(device.type)
         }
-    }, [data, error, loading])
+    }, [data])
 
     const [updateDevice] = useMutation(gql`
         mutation updateDevice($id: ID!, $input: DeviceUpdate!) {
             updateDevice(id: $id, input: $input){
+                id
                 name
                 model
                 macAddress
@@ -78,6 +76,15 @@ const EditDevice = () => {
         })
         history.push(`/device/${id}`)
     }
+
+    if (loading){
+        return <Spinner />
+    }
+
+    if (error){
+        return `Error! ${error}`
+    }
+
     return <>
         <Typography variant="h4">Edit - {device?.name}</Typography>
         <br />

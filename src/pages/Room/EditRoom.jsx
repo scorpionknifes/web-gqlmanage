@@ -10,7 +10,6 @@ import { useQuery, gql, useMutation } from '@apollo/client'
 const EditRoom = () => {
     let { id } = useParams()
     const history = useHistory()
-    const [room, setRoom] = useState()
     const [memo, setMemo] = useState("")
 
     const { loading, error, data } = useQuery(gql`
@@ -25,13 +24,10 @@ const EditRoom = () => {
     })
 
     useEffect(()=>{
-        if (!error && !loading && data) {
-            console.log(data)
-            const {room} = data
-            setRoom(room)
-            setMemo(room.memo)
+        if (data) {
+            setMemo(data?.room?.memo)
         }
-    },[data, error, loading])
+    },[data])
 
     const [updateRoom] = useMutation( gql`
         mutation updateRoom($id: ID!, $input: RoomUpdate!) {
@@ -55,12 +51,24 @@ const EditRoom = () => {
         history.push(`/room/${id}`)
     }
 
-    return loading ? <Spinner /> : <>
-        <Typography variant="h4">Room {room?.roomNumber}</Typography>
+    if (loading){
+        return <Spinner />
+    }
+
+    if (error){
+        return `Error! ${error}`
+    }
+
+    return <>
+        <Typography variant="h4">Room {data?.room?.roomNumber}</Typography>
         <br />
         <SaveButton back={`/room/${id}`} save={save} />
         <br />
-        <RoomEdit id={id} room={room} memo={memo} setMemo={setMemo}/>
+        <RoomEdit 
+            id={id} 
+            room={data?.room} 
+            memo={memo} setMemo={setMemo}
+        />
     </>
 }
 

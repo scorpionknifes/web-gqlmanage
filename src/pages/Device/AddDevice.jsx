@@ -48,7 +48,14 @@ const AddDevice = () => {
     }
     );
 
-    return (loading||error) ? <Spinner /> : <>
+    if (loading) {
+        return <Spinner />
+    }
+    if (error){
+        return `Error! ${error}`
+    }
+
+    return <>
         <Typography variant="h4">Add Device - Room {data?.room.roomNumber}</Typography>
         <br />
         <form onSubmit={createDevice}>

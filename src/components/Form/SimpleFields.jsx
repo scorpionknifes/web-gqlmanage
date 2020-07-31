@@ -1,26 +1,5 @@
 import React from 'react'
-import { TextField, InputLabel, Select, MenuItem, FormHelperText } from '@material-ui/core'
-
-const SimpleSelectionField = (props) => {
-    return (
-        <div style={{ margin: 8 }}>
-            <InputLabel>{props.name}</InputLabel>
-            <Select
-                value={props.value}
-                onChange={props.onChange}
-                fullWidth
-                margin="normal"
-            >
-                {
-                    props.selections?.map(item => {
-                        return <MenuItem key={item.value}  value={item.value}>item.name</MenuItem>
-                    })
-                }
-            </Select>
-            <FormHelperText>0 = enabled, 1 = removed, 2 = replaced</FormHelperText>
-        </div>
-    )
-}
+import { TextField } from '@material-ui/core'
 
 const SimpleTextField = (props) => {
     return (
@@ -34,7 +13,6 @@ const SimpleTextField = (props) => {
             helperText={props.helper}
             disabled={props.disabled}
             fullWidth
-            margin="normal"
             InputLabelProps={{
                 shrink: true,
             }}
@@ -59,4 +37,4 @@ const SimpleDateField = (props) => {
     )
 }
 
-export { SimpleDateField, SimpleSelectionField, SimpleTextField }
+export { SimpleDateField, SimpleTextField }

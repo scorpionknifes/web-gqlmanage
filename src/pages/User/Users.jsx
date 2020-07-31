@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Typography } from '@material-ui/core'
 import { useQuery, gql } from '@apollo/client'
 import UserFragment from '../../fragments/UserFragment'
 import { UserTable, UserInfo } from '../../components/User'
+import Spinner from '../../components/Spinner/Spinner'
 
 const Users = () => {
-
-    const [users, setUsers] = useState()
-
     const { loading, error, data } = useQuery(gql`
         query Users {
             users {
@@ -16,22 +14,23 @@ const Users = () => {
         }
         ${UserFragment}
     `)
-    
-    useEffect(()=>{
-        if (!error && !loading && data) {
-            console.log(data.users)
-            setUsers(data.users)
-        }
-    },[data, error, loading])
+
+    if (loading){
+        return <Spinner />
+    }
+
+    if (error){
+        return `Error! ${error}`
+    }
 
     return <>
         <Typography variant="h4">Info</Typography>
         <br />
-        <UserInfo user={users?users[0]:null}/>
+        <UserInfo user={data?.users?data?.users[0]:null}/>
         <br />
         <Typography variant="h4">Users</Typography>
         <br />
-        <UserTable users={users}/>
+        <UserTable users={data?.users}/>
     </>
 }
 

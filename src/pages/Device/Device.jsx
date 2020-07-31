@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom'
 import EditButton from '../../components/Button/EditButton'
 import { DeviceView } from '../../components/Device'
@@ -10,16 +10,11 @@ import { useQuery, gql } from '@apollo/client'
 
 const Device = () => {
     let { id } = useParams()
-    const [device, setDevice] = useState()
 
     const { loading, error, data } = useQuery(gql`
         query Device($id: ID!) {
             device(id: $id) {
                 ...DeviceFragment
-                room{
-                    id
-                    roomNumber
-                }
             }
         }
         ${DeviceFragment}
@@ -27,18 +22,20 @@ const Device = () => {
         variables: { id: id }
     })
 
-    useEffect(()=>{
-        if (!error && !loading && data) {
-            setDevice(data.device)
-        }
-    },[data, error, loading])
+    if (loading) {
+        return <Spinner/>
+    }
+
+    if (error) {
+        return `Error! ${error}`
+    }
     
-    return loading ? <Spinner/>:<>
-        <Typography variant="h4">Device - {device?.name}</Typography>
+    return <>
+        <Typography variant="h4">Device - {data?.device?.name}</Typography>
         <br />
-        <EditButton edit={`/device/edit/${id}`} back={`/room/${device?.room?.id}`} />
+        <EditButton edit={`/device/edit/${id}`} back={`/room/${data?.device?.room?.id}`} />
         <br />
-        <DeviceView device={device}/>
+        <DeviceView device={data?.device}/>
     </>
 }
 export default Device

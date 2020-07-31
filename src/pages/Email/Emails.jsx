@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { gql, useQuery } from '@apollo/client'
 import EmailTable from '../../components/Email/EmailTable';
 import { EmailFragment } from '../../fragments'
+import Spinner from '../../components/Spinner/Spinner';
 
 const Emails = () => {
-
-    const [emails, setEmails] = useState([])
-
     const { subscribeToMore, loading, data, error } = useQuery(gql`
         query Emails {
             emails {
@@ -34,15 +32,16 @@ const Emails = () => {
         })
     }, [subscribeToMore])
 
-    useEffect(() => {
-        if (!error && !loading && data) {
-            console.log(data.emails)
-            setEmails(data.emails)
-        }
-    }, [data, error, loading])
+    if (loading){
+        return <Spinner />
+    }
+
+    if (error){
+        return `Error! ${error}`
+    }
 
     return <>
-        <EmailTable emails={emails} />
+        <EmailTable emails={data?.emails} />
     </>
 }
 

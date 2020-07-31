@@ -1,19 +1,14 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { SimpleTextField} from '../Form/SimpleFields'
+import { SimpleTextField } from '../Form/SimpleFields'
 import StatusSelect from '../Form/StatusSelect'
 import TypeSelect from '../Form/TypeSelect'
 
-const useStyles = makeStyles((theme) => ({
-    root: {
+const useStyles = makeStyles(() => ({
+    deviceaddroot: {
         display: 'flex',
         flexWrap: 'wrap',
         maxWidth: '700px',
-    },
-    textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        width: '25ch',
     },
 }));
 
@@ -21,15 +16,15 @@ const Add = props => {
     const classes = useStyles()
 
     return (
-        <div className={classes.root}>
+        <div className={classes.deviceaddroot}>
             <div>
                 <SimpleTextField name="Name" helper="fully qualified name" required onChange={e => props.setName(e.target.value)} value={props.name} />
                 <SimpleTextField name="Model" helper="model number" required onChange={e => props.setModel(e.target.value)} value={props.model} />
-                <SimpleTextField name="MAC Address" helper="device mac address (optional)" required onChange={e => {formatMAC(e); props.setMacAddress(e.target.value)}} value={props.macAddress} />
+                <SimpleTextField name="MAC Address" helper="device mac address (optional)" required onChange={e => { formatMAC(e); props.setMacAddress(e.target.value) }} value={props.macAddress} />
                 <SimpleTextField name="Memo" helper="memo (optional)" required onChange={e => props.setMemo(e.target.value)} value={props.memo} />
                 <SimpleTextField name="Serial Number" helper="serial number" required onChange={e => props.setSerialNumber(e.target.value)} value={props.serialNumber} />
-                <StatusSelect set={props.setStatus} value={props.status}/>
-                <TypeSelect set={props.setType} value={props.type}/>
+                <StatusSelect set={props.setStatus} value={props.status} />
+                <TypeSelect set={props.setType} value={props.type} />
             </div>
         </div>
     );
