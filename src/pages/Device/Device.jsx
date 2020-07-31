@@ -31,7 +31,7 @@ const Device = () => {
         if (!error && !loading && data) {
             setDevice(data.device)
         }
-    },[data,loading,error])
+    },[data])
     
     return loading ? <Spinner/>:<>
         <Typography variant="h4">Device - {device?.name}</Typography>

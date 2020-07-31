@@ -35,7 +35,7 @@ const Room = () => {
             console.log(data)
             setRoom(data.room)
         }
-    },[data,loading,error])
+    },[data])
 
 
     return loading ? <Spinner/>:<>

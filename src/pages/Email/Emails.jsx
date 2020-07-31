@@ -35,7 +35,7 @@ const Emails = () => {
             console.log(data.emails)
             setEmails(data.emails)
         }
-    }, [data, loading, error])
+    }, [data])
 
     const SUBSCRIPTION = gql`
         subscription {

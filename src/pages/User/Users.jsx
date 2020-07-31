@@ -24,7 +24,7 @@ const Users = () => {
             console.log(data.users)
             setUsers(data.users)
         }
-    },[data,loading,error])
+    },[data])
 
     return <>
         <Typography variant="h4">Info</Typography>

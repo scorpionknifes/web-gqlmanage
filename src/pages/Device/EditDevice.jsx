@@ -45,7 +45,7 @@ const EditDevice = () => {
             setStatus(device.status)
             setType(device.type)
         }
-    }, [data, loading, error])
+    }, [data])
 
     const [updateDevice] = useMutation(gql`
         mutation updateDevice($id: ID!, $input: DeviceUpdate!) {

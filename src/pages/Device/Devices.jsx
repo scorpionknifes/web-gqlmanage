@@ -22,7 +22,7 @@ const Devices = () => {
         if (!error && !loading && data) {
             setDevices(data.devices)
         }
-    }, [data, loading, error])
+    }, [data])
 
     return loading ? <Spinner /> :
         <>

@@ -68,7 +68,7 @@ export default function HorizontalLinearStepper() {
             console.log(data.users)
             setUsers(data.users)
         }
-    },[data,loading,error])
+    },[data])
 
   const isStepOptional = (step) => {
     return false

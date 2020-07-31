@@ -23,7 +23,7 @@ const Rooms = () => {
         if (!error && !loading && data) {
             setRooms(data.rooms)
         }
-    }, [data, loading, error])
+    }, [data])
 
     return loading ? <Spinner/>:<>
         <Typography variant="h4">Rooms</Typography>

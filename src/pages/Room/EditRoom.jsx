@@ -31,7 +31,7 @@ const EditRoom = () => {
             setRoom(room)
             setMemo(room.memo)
         }
-    },[data,loading,error])
+    },[data])
 
     const [updateRoom] = useMutation( gql`
         mutation updateRoom($id: ID!, $input: RoomUpdate!) {
