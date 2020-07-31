@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { SimpleDateField, SimpleSelectionField, SimpleTextField } from '../Form/SimpleFields'
+import { SimpleTextField } from '../Form/SimpleFields'
 import { Typography } from '@material-ui/core';
 import { DeviceAdd } from '../Device';
 
@@ -24,8 +24,8 @@ const RoomAdd = props => {
         <Typography variant="h5">Room</Typography>
         <br />
         <div className={classes.root}>
-                    <SimpleTextField name="Room Number" helper="Room Number" required onChange={e => props.setRoomNumber(e.target.value)} value={props.room?.roomNumber} />
-                    <SimpleTextField name="Memo" helper="memo (optional)" onChange={e => props.setMemo(e.target.value)} value={props.memo} />
+            <SimpleTextField name="Room Number" helper="Room Number" required onChange={e => props.setRoomNumber(e.target.value)} value={props.room?.roomNumber} />
+            <SimpleTextField name="Memo" helper="memo (optional)" onChange={e => props.setMemo(e.target.value)} value={props.memo} />
         </div>
         <br />
         <Typography variant="h5">Device</Typography>
@@ -40,7 +40,7 @@ const RoomAdd = props => {
             type={props.type} setType={props.setType}
         />
         <br />
-        </>
+    </>
     );
 }
 

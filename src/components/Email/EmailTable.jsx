@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { TableContainer, TableHead, TableRow, TableCell, TableBody, Paper, Table, Typography } from '@material-ui/core'
+import { TableContainer, TableHead, TableRow, TableCell, TableBody, Paper, Table } from '@material-ui/core'
 import EmailRow from './EmailRow';
 
 const useStyles = makeStyles({

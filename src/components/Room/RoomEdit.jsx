@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { SimpleDateField, SimpleSelectionField, SimpleTextField } from '../Form/SimpleFields'
+import { SimpleSelectionField, SimpleTextField } from '../Form/SimpleFields'
 
 const useStyles = makeStyles((theme) => ({
     root: {

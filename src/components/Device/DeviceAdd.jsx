@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import {SimpleDateField, SimpleSelectionField, SimpleTextField} from '../Form/SimpleFields'
-import StatusSelect from '../Form/StatusSelect';
-import TypeSelect from '../Form/TypeSelect';
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import { SimpleTextField} from '../Form/SimpleFields'
+import StatusSelect from '../Form/StatusSelect'
+import TypeSelect from '../Form/TypeSelect'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,7 +40,7 @@ function formatMAC(e) {
         str = e.target.value.replace(/[^a-f0-9]/ig, "");
 
     while (r.test(str)) {
-        str = str.replace(r, '$1' + ':' + '$2');
+        str = str.replace(r, `$1:$2`);
     }
 
     e.target.value = str.slice(0, 17);

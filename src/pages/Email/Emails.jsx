@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { gql, useSubscription, useQuery } from '@apollo/client'
+import { gql, useQuery } from '@apollo/client'
 import EmailTable from '../../components/Email/EmailTable';
 import { EmailFragment } from '../../fragments'
 
@@ -18,41 +18,28 @@ const Emails = () => {
 
     useEffect(() => {
         subscribeToMore({
-            document: SUBSCRIPTION,
+            document: gql`
+                subscription {
+                    newEmails{
+                        id
+                        from
+                        to
+                        data
+                        createdDate
+                    }
+            }`,
             updateQuery(prev, { subscriptionData }) {
-                // `prev` already contains the new data
-                console.log(subscriptionData.data.newEmails)
-                console.log(prev)
-
-                
-                return { emails:[subscriptionData.data.newEmails, ...prev.emails] }
-             }
+                return { emails: [subscriptionData.data.newEmails, ...prev.emails] }
+            }
         })
-    },[])
+    }, [subscribeToMore])
 
     useEffect(() => {
         if (!error && !loading && data) {
             console.log(data.emails)
             setEmails(data.emails)
         }
-    }, [data])
-
-    const SUBSCRIPTION = gql`
-        subscription {
-            newEmails{
-                id
-                from
-                to
-                data
-                createdDate
-            }
-        }`
-
-        const sub = useSubscription(SUBSCRIPTION)
-
-    useEffect(()=>{
-        console.log(sub)
-    }, [sub])
+    }, [data, error, loading])
 
     return <>
         <EmailTable emails={emails} />

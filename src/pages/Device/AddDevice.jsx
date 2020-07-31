@@ -10,7 +10,6 @@ import { DeviceAdd } from '../../components/Device';
 const AddDevice = () => {
     let { id } = useParams()
 
-    const [device, setDevice] = useState("")
     const [name, setName] = useState("")
     const [model, setModel] = useState("")
     const [macAddress, setMacAddress] = useState("")
@@ -49,7 +48,7 @@ const AddDevice = () => {
     }
     );
 
-    return loading ? <Spinner /> : <>
+    return (loading||error) ? <Spinner /> : <>
         <Typography variant="h4">Add Device - Room {data?.room.roomNumber}</Typography>
         <br />
         <form onSubmit={createDevice}>
@@ -57,7 +56,6 @@ const AddDevice = () => {
             <br />
             <DeviceAdd
                 name={name} setName={setName}
-                roomNumber={device?.room?.roomNumber}
                 model={model} setModel={setModel}
                 macAddress={macAddress} setMacAddress={setMacAddress}
                 memo={memo} setMemo={setMemo}

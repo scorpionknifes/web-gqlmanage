@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { SimpleDateField, SimpleTextField } from '../Form/SimpleFields'
+import { SimpleTextField } from '../Form/SimpleFields'
 import StatusSelect from '../Form/StatusSelect';
 import TypeSelect from '../Form/TypeSelect';
 
@@ -42,7 +42,7 @@ function formatMAC(e) {
         str = e.target.value.replace(/[^a-f0-9]/ig, "");
 
     while (r.test(str)) {
-        str = str.replace(r, '$1' + ':' + '$2');
+        str = str.replace(r, `$1:$2`);
     }
 
     e.target.value = str.slice(0, 17);

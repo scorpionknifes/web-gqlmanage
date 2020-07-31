@@ -53,7 +53,7 @@ export default function MenuAppBar(props) {
     const classes = useStyles();
     const theme = useTheme();
     const { window } = props;
-    const [auth, setAuth] = useState(true);
+    const [auth, ] = useState(true);
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
     const handleDrawerToggle = () => {

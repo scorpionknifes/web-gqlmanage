@@ -49,10 +49,7 @@ export default function HorizontalLinearStepper() {
   const [skipped, setSkipped] = useState(new Set());
   const steps = getSteps();
 
-  const [roomNumber, setRoomNumber] = useState("")
-  const [memo, setMemo] = useState("")
-
-  const [users, setUsers] = useState()
+  const [, setUsers] = useState()
 
     const { loading, error, data } = useQuery(gql`
         query Users {
@@ -68,7 +65,7 @@ export default function HorizontalLinearStepper() {
             console.log(data.users)
             setUsers(data.users)
         }
-    },[data])
+    },[data, error, loading])
 
   const isStepOptional = (step) => {
     return false
@@ -103,8 +100,8 @@ export default function HorizontalLinearStepper() {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped((prevSkipped) => {
       const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
+      newSkipped.add(activeStep)
+      return newSkipped
     });
   };
 
@@ -116,8 +113,8 @@ export default function HorizontalLinearStepper() {
     <div className={classes.root}>
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
-          const stepProps = {};
-          const labelProps = {};
+          const stepProps = {}
+          const labelProps = {}
           return (
             <Step key={label} {...stepProps}>
               <StepLabel {...labelProps}>{label}</StepLabel>
