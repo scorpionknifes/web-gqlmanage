@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
@@ -10,6 +10,8 @@ import { useQuery, gql } from '@apollo/client'
 import RoomAdd from '../../components/Room/RoomAdd'
 import Spinner from '../../components/Spinner/Spinner'
 import Login from '../Login/Login'
+import {hash, codec} from 'sjcl'
+import { OpenhabCloud, Alexa } from '../../components/Room'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,6 +35,7 @@ export default function HorizontalLinearStepper() {
     const classes = useStyles();
     const [activeStep, setActiveStep] = useState(0);
     const steps = getSteps();
+    const [user, setUser] = useState();
 
     //fields
 
@@ -41,11 +44,12 @@ export default function HorizontalLinearStepper() {
 
     const [name, setName] = useState("")
     const [model, setModel] = useState("")
+    const [password, setPassword] = useState("")
     const [macAddress, setMacAddress] = useState("")
     const [memoController, setMemoController] = useState("")
     const [serialNumber, setSerialNumber] = useState("")
     const [status, setStatus] = useState(0)
-    const [type, setType] = useState(0)
+    const [type, setType] = useState(1)
 
 
     const { loading, error, data } = useQuery(gql`
@@ -56,6 +60,20 @@ export default function HorizontalLinearStepper() {
         }
         ${UserFragment}
     `)
+
+    useEffect(()=>{
+        let users = data?.users
+        if (users && users.length > 0){
+            setUser(users[0])
+            console.log(users[0])
+        }
+    },[data])
+
+    useEffect(()=>{
+        let myHash = codec.hex.fromBits(hash.sha256.hash(`${user?.abbr}_${roomNumber}`))
+        console.log(myHash)
+        setPassword(myHash)
+    }, [roomNumber,user])
 
     if (loading) {
         return <Spinner />
@@ -79,9 +97,16 @@ export default function HorizontalLinearStepper() {
                     status={status} setStatus={setStatus}
                     type={type} setType={setType}                />
             case 1:
-                return 'Sign up to OpenHAB Cloud on custom server'
+                return <OpenhabCloud
+                    openhab={user?.openhab}
+                    username={`${user?.abbr}_${roomNumber}@${user?.email}`}
+                    password={password}
+                />
             case 2:
-                return 'Sign up to Alexa'
+                return <Alexa
+                    username={`${user?.abbr}_${roomNumber}@${user?.email}`}
+                    password={password}
+                />
             case 3:
                 return 'Verify Email'
             default:
@@ -102,6 +127,7 @@ export default function HorizontalLinearStepper() {
     const handleReset = () => {
         setActiveStep(0);
     };
+    
 
     return (
         <div className={classes.root}>
@@ -123,7 +149,8 @@ export default function HorizontalLinearStepper() {
                         <Button onClick={handleReset} className={classes.button}>Reset</Button>
                     </div>) : (
                         <form onSubmit={handleNext}>
-                            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+                            {getStepContent(activeStep)}
+                            <br />
                             <div>
                                 <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>Back</Button>
                                 <Button

@@ -4,33 +4,33 @@ import { TableContainer, TableHead, TableRow, TableCell, TableBody, Paper, Table
 import VerifyButton from '../Button/VerifyButton';
 
 const useStyles = makeStyles({
-    openhabviewcontainer: {
+    alexaviewcontainer: {
         width: "100%",
         overflowX: "auto",
         maxWidth: 700,
     },
-    openhabviewtable: {
+    alexaviewtable: {
         minWidth: 500,
     },
-    openhabtablecell: {
+    alexatablecell: {
         whiteSpace: 'nowrap',
         width: 100,
     }
 });
 
-const OpenhabCloud = props => {
+const Alexa = props => {
     const classes = useStyles()
 
     return <>
-        <Typography variant="h5">Sign up to OpenHAB Cloud on custom server</Typography>
+        <Typography variant="h5">Sign up to Alexa</Typography>
         <br />
-        <Typography style={{ textDecoration: "underline", cursor: "pointer" }} onClick={() => window.open(props.openhab)} variant="h6">{props.openhab}</Typography>
+        <Typography style={{ textDecoration: "underline", cursor: "pointer" }} onClick={() => window.open("https://alexa.amazon.com/")} variant="h6">https://alexa.amazon.com/</Typography>
         <br />
-        <TableContainer component={Paper} className={classes.openhabviewcontainer}>
-            <Table className={classes.openhabviewtable} aria-label="simple table">
+        <TableContainer component={Paper} className={classes.alexaviewcontainer}>
+            <Table className={classes.alexaviewtable} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell className={classes.openhabtablecell}>
+                        <TableCell className={classes.alexatablecell}>
                             <Typography gutterBottom variant="h6">Login Detail</Typography>
                         </TableCell>
                         <TableCell></TableCell>
@@ -53,4 +53,4 @@ const OpenhabCloud = props => {
     </>
 }
 
-export default OpenhabCloud
+export default Alexa

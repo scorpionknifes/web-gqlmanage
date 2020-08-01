@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'
 import { TableContainer, TableHead, TableRow, TableCell, TableBody, Paper, Table, Typography } from '@material-ui/core'
 import { typestring, status } from '../Device/DeviceVar'
 
@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 });
 
 const DeviceView = ({device}) => {
-    const classes = useStyles();
+    const classes = useStyles()
     return (
     <TableContainer component={Paper} className={classes.deviceviewcontainer}>
         <Table className={classes.deviceviewtable} aria-label="simple table">
