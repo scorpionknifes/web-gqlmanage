@@ -24,7 +24,7 @@ const httpLink = createHttpLink({
 
 
 const subscriptionClient = new SubscriptionClient(
-    "ws://localhost:8000/query",
+    process.env.REACT_APP_GRAPHQL_WS,
     {
         reconnect: true,
     },
@@ -64,7 +64,7 @@ const client = new ApolloClient({
 
 function App() {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename={'/manage'}>
             <ApolloProvider client={client}>
                 <MenuAppBar>
                     <Switch>
