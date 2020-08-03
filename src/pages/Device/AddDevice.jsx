@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { Typography } from '@material-ui/core'
 import CreateButton from '../../components/Button/CreateButton'
-import { RoomFragment } from '../../fragments'
+import { RoomFragment, DeviceFragment } from '../../fragments'
 import { useQuery, gql, useMutation } from '@apollo/client'
 import Spinner from '../../components/Spinner/Spinner'
 import { DeviceAdd } from '../../components/Device'
@@ -19,6 +19,8 @@ const AddDevice = () => {
     const [status, setStatus] = useState(0)
     const [type, setType] = useState(0)
 
+    const history = useHistory()
+
     const { loading, error, data } = useQuery(gql`
         query Room($id: ID!) {
             room(id: $id) {
@@ -33,33 +35,78 @@ const AddDevice = () => {
     const [createDevice] = useMutation(gql`
         mutation createDevice($input: DeviceInput!){
             createDevice(input: $input){
-                id
+                ...DeviceFragment
             }
-        }`,{
-        variables: { input:{
-            roomID: id,
-            name: name,
-            model: model,
-            macAddress: macAddress,
-            memo: memo,
-            serialNumber: serialNumber,
-            status: status,
-            type: type
-        } }
-    }
+        }${DeviceFragment}
+        `,
     );
+
+    const create = () => {
+        createDevice({
+            variables: {
+                input: {
+                    roomID: id,
+                    name: name,
+                    model: model,
+                    macAddress: macAddress,
+                    memo: memo,
+                    serialNumber: serialNumber,
+                    status: status,
+                    type: type
+                }
+            },
+            refetchQueries: [
+                {
+                    query: gql`
+                        query Devices {
+                            devices {
+                                ...DeviceFragment
+                            }
+                        }
+                        ${DeviceFragment}
+                    `
+                }, {
+                    query: gql`
+                        query Device($id: ID!) {
+                            device(id: $id) {
+                                ...DeviceFragment
+                            }
+                        }
+                        ${DeviceFragment}
+                    `,
+                    variables: { id: id }
+                }, {
+                    query: gql`
+                        query Room($id: ID!) {
+                            room(id: $id) {
+                                ...RoomFragment
+                                devices{
+                                    ...DeviceFragment
+                                }
+                            }
+                        }
+                        ${RoomFragment}
+                        ${DeviceFragment}
+                    `,
+                    variables: { id: id }
+                }
+            ]
+        })
+        history.push(`/room/${id}`)
+    }
+
 
     if (loading) {
         return <Spinner />
     }
-    if (error){
-        return <Login error={error}/>
+    if (error) {
+        return <Login error={error} />
     }
 
     return <>
         <Typography variant="h4">Add Device - Room {data?.room.roomNumber}</Typography>
         <br />
-        <form onSubmit={createDevice}>
+        <form onSubmit={create}>
             <CreateButton back={`/room/${id}`} />
             <br />
             <DeviceAdd

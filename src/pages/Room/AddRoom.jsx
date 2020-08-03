@@ -11,7 +11,9 @@ import RoomAdd from '../../components/Room/RoomAdd'
 import Spinner from '../../components/Spinner/Spinner'
 import Login from '../Login/Login'
 import { hash, codec } from 'sjcl'
-import { OpenhabCloud, Alexa } from '../../components/Room'
+import { OpenhabCloud, Alexa, VerifyEmail } from '../../components/Room'
+import { useHistory } from 'react-router-dom'
+import RoomFragment from '../../fragments/RoomFragment'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -51,6 +53,8 @@ export default function HorizontalLinearStepper() {
     const [status, setStatus] = useState(0)
     const [type, setType] = useState(1)
 
+    const history = useHistory()
+
 
     const { loading, error, data } = useQuery(gql`
         query Users {
@@ -85,7 +89,18 @@ export default function HorizontalLinearStepper() {
                 username: `${user?.abbr}_${roomNumber}@${user?.email}`,
                 password: password
             }
-        }
+        },
+        refetchQueries: [
+            {
+                query: gql`
+                query Rooms {
+                    rooms {
+                        ...RoomFragment
+                    }
+                }
+                ${RoomFragment}`
+            }
+        ]
     })
 
 
@@ -136,7 +151,7 @@ export default function HorizontalLinearStepper() {
                     password={password}
                 />
             case 3:
-                return 'Verify Email'
+                return <VerifyEmail submit={createRoom} />
             default:
                 return 'Unknown step'
         }
@@ -181,14 +196,19 @@ export default function HorizontalLinearStepper() {
                             <br />
                             <div>
                                 <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>Back</Button>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    type="submit"
-                                    className={classes.button}
-                                >
-                                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                                </Button>
+                                {activeStep === steps.length - 1 ?
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={()=>{createRoom(); history.push("/")}}
+                                        className={classes.button}
+                                    >Finish</Button> :
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        type="submit"
+                                        className={classes.button}
+                                    >Next</Button>}
                             </div>
                         </form>
                     )}

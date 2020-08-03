@@ -25,7 +25,7 @@ const RoomAdd = props => {
         <br />
         <div className={classes.root}>
             <SimpleTextField name="Room Number" helper="Room Number" required onChange={e => props.setRoomNumber(e.target.value)} value={props.roomNumber} />
-            <SimpleTextField name="Memo" helper="memo (optional)" onChange={e => props.setMemo(e.target.value)} value={props.memo} />
+            <SimpleTextField name="Memo" helper="memo (optional)" required onChange={e => props.setMemo(e.target.value)} value={props.memo} />
         </div>
         <br />
         <Typography variant="h5">Controller</Typography>
