@@ -6,11 +6,11 @@ import StepLabel from '@material-ui/core/StepLabel'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import UserFragment from '../../fragments/UserFragment'
-import { useQuery, gql } from '@apollo/client'
+import { useQuery, gql, useMutation } from '@apollo/client'
 import RoomAdd from '../../components/Room/RoomAdd'
 import Spinner from '../../components/Spinner/Spinner'
 import Login from '../Login/Login'
-import {hash, codec} from 'sjcl'
+import { hash, codec } from 'sjcl'
 import { OpenhabCloud, Alexa } from '../../components/Room'
 
 const useStyles = makeStyles((theme) => ({
@@ -61,19 +61,46 @@ export default function HorizontalLinearStepper() {
         ${UserFragment}
     `)
 
-    useEffect(()=>{
+
+    const [createRoom] = useMutation(gql`
+        mutation($input:RoomInput!) {
+            createRoom(input:$input){
+                id
+            }
+        }`, {
+        variables: {
+            input: {
+                roomNumber: roomNumber,
+                memo: memo,
+                devices: [{
+                    name: name,
+                    model: model,
+                    macAddress: macAddress,
+                    memo: memo,
+                    serialNumber: serialNumber,
+                    status: status,
+                    type: type
+                }],
+                username: `${user?.abbr}_${roomNumber}@${user?.email}`,
+                password: password
+            }
+        }
+    })
+
+
+    useEffect(() => {
         let users = data?.users
-        if (users && users.length > 0){
+        if (users && users.length > 0) {
             setUser(users[0])
             console.log(users[0])
         }
-    },[data])
+    }, [data])
 
-    useEffect(()=>{
+    useEffect(() => {
         let myHash = codec.hex.fromBits(hash.sha256.hash(`${user?.abbr}_${roomNumber}`))
         console.log(myHash)
         setPassword(myHash)
-    }, [roomNumber,user])
+    }, [roomNumber, user])
 
     if (loading) {
         return <Spinner />
@@ -86,7 +113,7 @@ export default function HorizontalLinearStepper() {
     const getStepContent = step => {
         switch (step) {
             case 0:
-                return <RoomAdd 
+                return <RoomAdd
                     roomNumber={roomNumber} setRoomNumber={setRoomNumber}
                     memo={memo} setMemo={setMemo}
                     name={name} setName={setName}
@@ -95,7 +122,7 @@ export default function HorizontalLinearStepper() {
                     memoController={memoController} setMemoController={setMemoController}
                     serialNumber={serialNumber} setSerialNumber={setSerialNumber}
                     status={status} setStatus={setStatus}
-                    type={type} setType={setType}                />
+                    type={type} setType={setType} />
             case 1:
                 return <OpenhabCloud
                     openhab={user?.openhab}
@@ -113,7 +140,7 @@ export default function HorizontalLinearStepper() {
                 return 'Unknown step'
         }
     }
-    
+
 
     const handleNext = event => {
         event.preventDefault()
@@ -127,7 +154,7 @@ export default function HorizontalLinearStepper() {
     const handleReset = () => {
         setActiveStep(0);
     };
-    
+
 
     return (
         <div className={classes.root}>
