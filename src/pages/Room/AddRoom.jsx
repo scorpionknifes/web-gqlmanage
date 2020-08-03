@@ -73,6 +73,7 @@ export default function HorizontalLinearStepper() {
                 roomNumber: roomNumber,
                 memo: memo,
                 devices: [{
+                    roomID: "",
                     name: name,
                     model: model,
                     macAddress: macAddress,

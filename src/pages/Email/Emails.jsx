@@ -28,7 +28,7 @@ const Emails = () => {
                     }
             }`,
             updateQuery(prev, { subscriptionData }) {
-                return { emails: [subscriptionData.data.newEmails, ...prev.emails] }
+                return { emails: [...prev.emails,subscriptionData.data.newEmails ] }
             }
         })
     }, [subscribeToMore])
