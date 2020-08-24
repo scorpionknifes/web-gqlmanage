@@ -8,7 +8,7 @@ import Spinner from '../../components/Spinner/Spinner'
 import { DeviceAdd } from '../../components/Device'
 import Login from '../Login/Login'
 
-const AddDevice = () => {
+const AddDevice = () => { 
     let { id } = useParams()
 
     const [name, setName] = useState("")

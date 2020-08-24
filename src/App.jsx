@@ -65,16 +65,16 @@ const client = new ApolloClient({
 
 const theme = createMuiTheme({
     palette: {
-      primary: {
-        main: '#c30000',
-      },
-      secondary: {
-        main: '#c30000',
-      },
+        primary: {
+            main: '#c30000',
+        },
+        secondary: {
+            main: '#c30000',
+        },
     },
-  });
+});
 
-function App() {
+const App = () => {
     return (
         <ThemeProvider theme={theme}>
             <BrowserRouter basename={'/manage'}>
