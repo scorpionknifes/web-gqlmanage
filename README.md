@@ -24,6 +24,24 @@ Material UI:
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Instructions
+
+Rename [.env-example](.env-example) to .env and setup variables
+```
+# Name of the App
+REACT_APP_HOTEL = My Hotel Name
+
+# GraphQL backend endpoint
+REACT_APP_GRAPHQL_URL = http://localhost:3000/query
+REACT_APP_GRAPHQL_WS = ws://localhost:3000/query
+
+# Basename for react-routes
+REACT_APP_BASENAME = 
+
+# React tell generate sourcemap
+GENERATE_SOURCEMAP = false
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
